@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>x86如何获取自己的eip | A Simple Blog</title><meta name="author" content="redqx"><meta name="copyright" content="redqx"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="为什么会提出这个问题呢一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位 比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,, 这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了 方法方法一: call的入栈就是把返回地址入栈 返回地址就是一个很真实的东西 常见的模型如下 123call tag;tag:pop eax;  这样就获取了pop eax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="x86如何获取自己的eip">
+<meta property="og:url" content="https://redqx.github.io/blog/2023/12/09/12425f459933/index.html">
+<meta property="og:site_name" content="A Simple Blog">
+<meta property="og:description" content="为什么会提出这个问题呢一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位 比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,, 这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了 方法方法一: call的入栈就是把返回地址入栈 返回地址就是一个很真实的东西 常见的模型如下 123call tag;tag:pop eax;  这样就获取了pop eax">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://redqx.github.io/blog/img/me.png">
+<meta property="article:published_time" content="2023-12-09T08:24:42.150Z">
+<meta property="article:modified_time" content="2023-12-09T14:38:09.744Z">
+<meta property="article:author" content="redqx">
+<meta property="article:tag" content="shellcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redqx.github.io/blog/img/me.png"><link rel="shortcut icon" href="/blog/img/favicon.png"><link rel="canonical" href="https://redqx.github.io/blog/2023/12/09/12425f459933/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'x86如何获取自己的eip',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-09 22:38:09'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/blog/img/me.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/blog/img/1.jpg')"><nav id="nav"><span id="blog-info"><a href="/blog/" title="A Simple Blog"><span class="site-name">A Simple Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">x86如何获取自己的eip</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-09T08:24:42.150Z" title="Created 2023-12-09 16:24:42">2023-12-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-09T14:38:09.744Z" title="Updated 2023-12-09 22:38:09">2023-12-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/Windows%E9%80%86%E5%90%91/">Windows逆向</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="x86如何获取自己的eip"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="为什么会提出这个问题呢"><a href="#为什么会提出这个问题呢" class="headerlink" title="为什么会提出这个问题呢"></a>为什么会提出这个问题呢</h1><p>一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位</p>
+<p>比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,,</p>
+<p>这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="方法一-call的入栈"><a href="#方法一-call的入栈" class="headerlink" title="方法一: call的入栈"></a>方法一: call的入栈</h2><p>就是把返回地址入栈</p>
+<p>返回地址就是一个很真实的东西</p>
+<p>常见的模型如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call tag;</span><br><span class="line">tag:</span><br><span class="line">pop eax;</span><br></pre></td></tr></table></figure>
+
+<p>这样就获取了<code>pop eax</code>汇编所在的eip地址了</p>
+<p>然后通过后期的一些处理,,,就可以定位到自己的字符串</p>
+<p>举一个例子</p>
+<p><img src="/blog/./img/image-20230722163015295.png" alt="image-20230722163015295"></p>
+<p>比如我们已知x1的地址,,如何获取y1的地址</p>
+<p>那就是x1的真实地址+一个相对偏移,,然后就可以定位到y1</p>
+<p>这个相对偏移,,比如是(y1地址-x1地址)</p>
+<p>无论x1地址怎么变化,,,我们只要拿着x1的真实地址,,然后x1+一个偏移,,就可以获取y1的真实地址</p>
+<p>所以,,大概就是这么一个道理,,,如果读者读不懂,,可以多看几遍</p>
+<p>于是见一下代码</p>
+<p>ps: 这个例子不太妥当,,,但是也想不到其它例子了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">lpfuncAddr</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;you got me!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    DWORD* lp_apiAddr;</span><br><span class="line"></span><br><span class="line">    __asm &#123;</span><br><span class="line">        push eax;</span><br><span class="line">        push ebx;</span><br><span class="line">        push ecx;</span><br><span class="line">    label_code:</span><br><span class="line">        call label_reloc;</span><br><span class="line">    label_reloc:</span><br><span class="line">        pop ebx;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//重定位lpfuncAddr;</span></span><br><span class="line">        lea eax, lpfuncAddr;</span><br><span class="line">        sub eax, label_reloc;</span><br><span class="line">        add eax, ebx;</span><br><span class="line"></span><br><span class="line">        lea ecx, lp_apiAddr;</span><br><span class="line">        mov[ecx], eax;</span><br><span class="line"></span><br><span class="line">        call eax;</span><br><span class="line"></span><br><span class="line">        pop ecx;</span><br><span class="line">        pop ebx;</span><br><span class="line">        pop eax;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如我们获取函数<code>lpfuncAddr</code>的地址,,存入到<code>lp_apiAddr</code>,并调用函数</p>
+<p>ebx就是一个真实地址,,,然后<code>label_reloc</code>也是<code>pop ebx;</code>的一个原始地址,<code>label_reloc</code>也是一个原始地址</p>
+<p>在汇编里面,下面这2巨汇编涉及的地址会被写死的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//重定位lpfuncAddr;</span><br><span class="line">lea eax, lpfuncAddr;</span><br><span class="line">sub eax, label_reloc;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/blog/./img/image-20231209213042743.png" alt="image-20231209213042743"></p>
+<p>然后我们尝试调试一下</p>
+<p><img src="/blog/./img/image-20231209213251723.png" alt="image-20231209213251723"></p>
+<p>可以看到真实的基地址是<code>00600000</code>,原始的是<code>00400000</code></p>
+<p>然后通过定位好,,可以看到,,,eax已经获取了目标函数了</p>
+<p>为什么说,,这个例子举得不好,,,</p>
+<p>因为exe会重定位的,,,就针对本代码而言</p>
+<p><img src="/blog/./img/image-20231209213608784.png" alt="image-20231209213608784"></p>
+<p>只不过,,之前的</p>
+<p><img src="/blog/./img/image-20231209213624093.png" alt="image-20231209213624093"></p>
+<p>是被我手动修改了罢了,,,但也不影响</p>
+<h2 id="方法二-call-重构"><a href="#方法二-call-重构" class="headerlink" title="方法二: call 重构"></a>方法二: call 重构</h2><p>call类型来实现代码重构,,,</p>
+<p>那是什么意思???</p>
+<p><img src="/blog/./img/image-20231209221233614.png" alt="image-20231209221233614"></p>
+<p>可以看到<code>  call    near ptr loc_9F18D8+4</code></p>
+<p>call的地址是0F18DC,然后返回地址<code>009F18DD</code>会入栈</p>
+<p>然后call之后,,第一句执行的却是 <code>FFC3</code></p>
+<p>FFC3是inc ebx,,,虽然这个C3可以自定义,,比如inc eax是FFC2</p>
+<p>所以FFC3其实就是一个代码重构,,拿着<code>E8 FF FF FF FF </code>的FF和C3一起重构为inc ebx</p>
+<p>然后再来一个0x5B,也就是pop ebx,,把栈的返回值给拿出来,,,一样的实现了方法一的效果</p>
+<p>只不过会比方法1多消耗一个字节,,,方法1用6字节,,,方法2用7字节,,,但是干扰效果比方法1好</p>
+<p><img src="/blog/./img/image-20231209222407182.png" alt="image-20231209222407182"></p>
+<p>例子如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">lpfuncAddr</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;you got me!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    DWORD* lp_apiAddr;</span><br><span class="line"></span><br><span class="line">    __asm &#123;</span><br><span class="line">        push eax;</span><br><span class="line">        push ebx;</span><br><span class="line">        push ecx;</span><br><span class="line">        _emit <span class="number">0xE8</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>; <span class="comment">//上面完整的形成了一条汇编指令,,然后label_relo就是要入栈的地址</span></span><br><span class="line">    label_reloc: </span><br><span class="line">        _emit <span class="number">0xC3</span>;</span><br><span class="line">        _emit <span class="number">0x5B</span>;</span><br><span class="line">        <span class="comment">//重定位lpfuncAddr;</span></span><br><span class="line">        lea eax, lpfuncAddr;</span><br><span class="line">        sub eax, label_reloc;</span><br><span class="line">        add eax, ebx;</span><br><span class="line"></span><br><span class="line">        lea ecx, lp_apiAddr;</span><br><span class="line">        mov[ecx], eax;</span><br><span class="line"></span><br><span class="line">        call eax;</span><br><span class="line"></span><br><span class="line">        pop ecx;</span><br><span class="line">        pop ebx;</span><br><span class="line">        pop eax;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为什么我们在<code>_emit 0xFF;</code>后写<code>label_reloc: </code>,而不是其它字节之后呢???</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    _emit 0xE8;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF; //上面完整的形成了一条汇编指令,,然后label_relo就是要入栈的地址</span><br><span class="line">label_reloc: </span><br></pre></td></tr></table></figure>
+
+<p>这要追溯到方法1的原理了</p>
+<p><img src="/blog/./img/image-20230722163015295.png"></p>
+<p>ebx是call入栈的地址,,,也是x1的真实地址,,</p>
+<p>我们要保证栈中的地址和x1地址是有关系的,,,,x1是原始的,,栈的是真实的</p>
+<p>这就是为什么我们要在xxx后面写label_reloc地址了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    _emit 0xE8;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF; //上面完整的形成了一条汇编指令,,然后label_relo就是要入栈的地址</span><br><span class="line">label_reloc: </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法三-浮点运指令特性"><a href="#方法三-浮点运指令特性" class="headerlink" title="方法三:  浮点运指令特性"></a>方法三:  浮点运指令特性</h2><p>什么特性呢?</p>
+<p>在一个浮点数指令执行后,,,,他的执行地址会被特殊的保存起来</p>
+<p>然后我们可以把保存的地址pop导出到栈中,然后读取出来</p>
+<p>案例1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.text:00A65084 D9 EE                         fldz</span><br><span class="line">.text:00A65086 D9 74 24 F4                   fnstenv byte ptr [esp-12]</span><br><span class="line">.text:00A6508A 5B                            pop     ebx</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/blog/./img/image-20231209223211445.png" alt="image-20231209223211445"></p>
+<p>案例2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">debug043:00E00000 DA C5                         fcmovb  st, st(5)</span><br><span class="line">debug043:00E00002 B8 5B 43 B1 DA                mov     eax, 0DAB1435Bh</span><br><span class="line">debug043:00E00007 D9 74 24 F4                   fnstenv byte ptr [esp-12]</span><br><span class="line">debug043:00E0000B 5D                            pop     ebp</span><br></pre></td></tr></table></figure>
+
+<p>案例3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.data:0041A005 DA C9                         fcmove  st, st(1)</span><br><span class="line">.data:0041A007 D9 74 24 F4                   fnstenv byte ptr [esp-12]</span><br><span class="line">.data:0041A00B 5F                            pop     edi;edi直接获取0041A005</span><br></pre></td></tr></table></figure>
+
+<p>案例4</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.data:0041A01B fcmovbe st, st(2)</span><br><span class="line">.data:0041A01D fnstenv byte ptr [esp-12]</span><br><span class="line">.data:0041A021 pop     eax;eax直接获取0041A01</span><br></pre></td></tr></table></figure>
+
+<p>案例5</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data:0041A036 fldpi</span><br><span class="line">.data:0041A038 mov     ebx, 0F575EA6Bh</span><br><span class="line">.data:0041A03D</span><br><span class="line">.data:0041A03D loc_41A03D </span><br><span class="line">.data:0041A03D  fnstenv byte ptr [esp-12]</span><br><span class="line">.data:0041A041 pop     ebp ;ebp直接获取0041A036 </span><br></pre></td></tr></table></figure>
+
+
+
+<p>总结规律</p>
+<p><code> fnstenv byte ptr [esp-12]</code> 会把最近最靠近的那个浮点数操作指令的地址入栈</p>
+<p>然后pop 出来就是那个地址</p>
+<p>所以常见浮点数操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">D9 EE                         fldz</span><br><span class="line">D9 EB                         fldpi</span><br><span class="line">D9 C2                         fld     st(2)</span><br><span class="line">DD C6                         ffree   st(6)</span><br><span class="line">D9 CE                         fxch    st(6)</span><br><span class="line">D9 E9                         fldl2t</span><br><span class="line">DB D0                         fcmovnbe st, st</span><br><span class="line">DA C9                         fcmove  st, st(1)</span><br><span class="line">DA D2                         fcmovbe st, st(2)</span><br><span class="line">DB C3                         fcmovnb st, st(3)</span><br><span class="line">DA C5                         fcmovb  st, st(5)</span><br><span class="line">DA D6                         fcmovbe st, st(6)</span><br><span class="line">DB CF                         fcmovne st, st(7)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其它方法"><a href="#其它方法" class="headerlink" title="其它方法"></a>其它方法</h2><p>中断: 说用int 2Eh 或者 int 2Ch 可以把下一条地址入ebx,没有实验成功</p>
+<p>异常:  通过异常,可以记录异常发生的位置eip</p>
+<p>但是没有超过过</p>
+<h1 id="后期"><a href="#后期" class="headerlink" title="后期"></a>后期</h1><p>关于x64如何获取自己的RIP</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://redqx.github.io/blog">redqx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://redqx.github.io/blog/2023/12/09/12425f459933/">https://redqx.github.io/blog/2023/12/09/12425f459933/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/shellcode/">shellcode</a></div><div class="post_share"><div class="social-share" data-image="/blog/img/me.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blog/2023/12/09/7c0f3f13417e/" title="破资料"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">破资料</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/blog/2023/12/09/022a7512432b/" title="kernel32基地址获取"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-09</div><div class="title">kernel32基地址获取</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/blog/img/me.png" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">redqx</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/blog/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/blog/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">会当凌绝顶,一览众山小..</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8F%90%E5%87%BA%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E5%91%A2"><span class="toc-number">1.</span> <span class="toc-text">为什么会提出这个问题呢</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-call%E7%9A%84%E5%85%A5%E6%A0%88"><span class="toc-number">2.1.</span> <span class="toc-text">方法一: call的入栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-call-%E9%87%8D%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text">方法二: call 重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89-%E6%B5%AE%E7%82%B9%E8%BF%90%E6%8C%87%E4%BB%A4%E7%89%B9%E6%80%A7"><span class="toc-number">2.3.</span> <span class="toc-text">方法三:  浮点运指令特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E6%96%B9%E6%B3%95"><span class="toc-number">2.4.</span> <span class="toc-text">其它方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E6%9C%9F"><span class="toc-number">3.</span> <span class="toc-text">后期</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By redqx</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
