@@ -85,6 +85,70 @@
 
 <section class="post-item">
     <div class="content">
+      <a href="/2023/85ab09d046f5/">
+        <h2 class="post-title">shellcode的一些常见手法</h2>
+      </a>
+      <a href="/2023/85ab09d046f5/">
+          <div class="post-abstract">
+            
+			    字符串比较比如我们想实现一个strcmp(xxx,&quot;GetProaddress&quot;)
+汇编如何实现
+123456cmp dword ptr[eax], 0x50746547; //Getpjnz Get_Function;
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+
+                wiki
+                
+            
+          </span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/60e04145dd87/">
+        <h2 class="post-title">x86之shellcode如何获取GetProcAddress和LoadLibrary</h2>
+      </a>
+      <a href="/2023/60e04145dd87/">
+          <div class="post-abstract">
+            
+			    步骤如下下面4个步骤的寄存器是有关联的
+环境有关系
+首先获取kernel32.dll的基地址12345678xor ecx, ecx;mov eax, fs: [ecx + 0x30] ;//获取PEBmov eax, [eax + 0xc
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+
+                wiki
+                
+            
+          </span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
       <a href="/2023/324189aa4c67/">
         <h2 class="post-title">shellcode之kernel32基地址获取</h2>
       </a>
@@ -325,80 +389,6 @@ rdata也可以存储相关信息
       </a>
       <div class="post-info">
         <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/756cd7c11b60/">
-        <h2 class="post-title">学逆向怎么搞钱</h2>
-      </a>
-      <a href="/2023/756cd7c11b60/">
-          <div class="post-abstract">
-            
-			    为什么会思考这个那就是学re有什么用???
-其实更多的是喜欢re吧
-为什么不喜欢web呢?
-可能认为web太杂了,同时原理性的东西不强,
-但这也这是一个不会web的我发出二点言论罢了,,,,并代表不了什么
-那么回过头来,继续描述
-为什么要学
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-12</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                突然的思考
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/ff8e2e3f9dd8/">
-        <h2 class="post-title">2023-12-10-周日</h2>
-      </a>
-      <a href="/2023/ff8e2e3f9dd8/">
-          <div class="post-abstract">
-            
-			    农历十月廿八 
-天气: 多云, 
-温度:12℃
-
-早上是8:30起床的
-今天有实验室的摆摊….摆摊人先是zk和tyj
-我并不知道自己是什么时候去摆摊
-用电脑打开安排表,,,看到tyj,zk,我,达哥是上午9:50到11:30的摆摊
-然后我在
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-12</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                大学时光
-                
-            
-          </span>
         
       </div>
     </div>

