@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>win.pe.延迟导入表</title>
+<meta name="keywords" content="win.pe.延迟导入表, The simpler, the happier">
+<meta name="description" content="
+解释1
+
+延迟加载导入表和导入表示相互分离的，延迟加载导入表是特殊的导入表，和导入表不同的是，
+延迟加载导入表所记录的dll不会被操作系统加载，只有在函数被应用程序调用的时候，
+PE中注册的延迟加载函数才会根据延迟加载导入表的记录，动态加">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="win.pe.延迟导入表">
+<meta property="og:description" content="
+解释1
+
+延迟加载导入表和导入表示相互分离的，延迟加载导入表是特殊的导入表，和导入表不同的是，
+延迟加载导入表所记录的dll不会被操作系统加载，只有在函数被应用程序调用的时候，
+PE中注册的延迟加载函数才会根据延迟加载导入表的记录，动态加">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.0.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://redqx.github.io">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="https://redqx.github.io">
+        <h1 class="site-title">The simpler, the happier</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags/" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/categories/" class="menu purple-link">
+        分类
+      </a>
+    
+  
+    
+      <a href="/archives/" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about/" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">win.pe.延迟导入表</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-15</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <blockquote>
+<p>解释1</p>
+</blockquote>
+<p>延迟加载导入表和导入表示相互分离的，延迟加载导入表是特殊的导入表，和导入表不同的是，</p>
+<p>延迟加载导入表所记录的dll不会被操作系统加载，只有在函数被应用程序调用的时候，</p>
+<p>PE中注册的延迟加载函数才会根据延迟加载导入表的记录，动态加载dll，以及修正导入函数的VA。</p>
+<blockquote>
+<p>解释2</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/evileagle/article/details/12718845">https://blog.csdn.net/evileagle/article/details/12718845</a></p>
+<p>和dll加载有关</p>
+<p>以前dll的加载是,有很多dll干活,把所有dll都喊进屋,到谁干活谁就出来, ps:屋子可能不太好装下怎么多人</p>
+<p>延迟导入就是准备很多dll干活,不先把他们领进门,让他们所有人在外面等着,干活时,喊谁,谁就进来</p>
+<p>延迟加载导入是一种合理利用进程加载机制提高进程加载效率的技术，</p>
+<p>使用延迟加载导入能跳过加载前对引入函数的检测及加载后对IAT的修正，</p>
+<p>从而避免出现诸如“无法找到组件”的错误提示，提高程序的适应性。</p>
+<p>及时即用</p>
+<p><a class="simple-lightbox" href="/./img/7dd3496d4e184434a98edc11de043e96Untitled11.png"><img   src="/images/loading.svg" data-src="/./img/7dd3496d4e184434a98edc11de043e96Untitled11.png"  alt="Untitled" lazyload></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IMAGE_DELAYLOAD_DESCRIPTOR</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        DWORD AllAttributes;<span class="comment">// 属性,说必须为0</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">        &#123;</span></span><br><span class="line">            DWORD RvaBased : <span class="number">1</span>;             <span class="comment">// Delay load version 2</span></span><br><span class="line">            DWORD ReservedAttributes : <span class="number">31</span>;</span><br><span class="line">        &#125; DUMMYSTRUCTNAME;</span><br><span class="line">    &#125; Attributes;</span><br><span class="line"></span><br><span class="line">    DWORD DllNameRVA;                       <span class="comment">// 指向dll的名字,好像是一个VA地址</span></span><br><span class="line">    DWORD ModuleHandleRVA;                  <span class="comment">// 指向dll的模块句柄</span></span><br><span class="line">    DWORD ImportAddressTableRVA;            <span class="comment">// IAT</span></span><br><span class="line">    DWORD ImportNameTableRVA;               <span class="comment">// INT</span></span><br><span class="line">    DWORD BoundImportAddressTableRVA;       <span class="comment">// 绑定该表的RVA 可选</span></span><br><span class="line">    DWORD UnloadInformationTableRVA;        <span class="comment">// 卸载该表的RVA 可选</span></span><br><span class="line">    DWORD TimeDateStamp;                    <span class="comment">// 0 if not bound,</span></span><br><span class="line">    <span class="comment">// Otherwise, date/time of the target DLL</span></span><br><span class="line"></span><br><span class="line">&#125; IMAGE_DELAYLOAD_DESCRIPTOR, *PIMAGE_DELAYLOAD_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
+
+<p>不使用延迟加载</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ml -c -coff He1loworld.<span class="keyword">asm</span></span><br><span class="line">link -subsystem : windows Hellowor1d.obj</span><br><span class="line">He1loworld</span><br></pre></td></tr></table></figure>
+
+<p>使用延迟加载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ml -c -coff Helloworld.asm</span><br><span class="line">link -subsystem:windows -delayload:MyD11.dll delayimp.lib HelloWorld.obj</span><br><span class="line">Helloworld</span><br></pre></td></tr></table></figure>
+
+<p>那么link -subsystem:windows -delayload:MyD11.dll delayimp.lib HelloWorld.obj干了什么?</p>
+<p>首先，将一个函数_delayLoadHelper嵌入PE文件的可执行模块。</p>
+<p>其次，从可执行模块的导入表部分删除MyDl.dll 及相关信息，这样，当进程初始化的时候，</p>
+<p>操作系统的加载程序就不会显式加载该动态链接库了。</p>
+<p>最后，在PE中把刚才删除的相关信息重新构造好，以便告诉_delayLoadHelper哪些函数是从MyDll.dll中导出的。</p>
+<p>在调用API的时候</p>
+<p><a class="simple-lightbox" href="/./img/7dd3496d4e184434a98edc11de043e96Untitled12.png"><img   src="/images/loading.svg" data-src="/./img/7dd3496d4e184434a98edc11de043e96Untitled12.png"  alt="Untitled" lazyload></a></p>
+<p>然后出现就出现了区别</p>
+<p>不使用该技术就直接前往该dll</p>
+<p>使用该技术,去往某个函数,然后LoadLibiary和GetProcessAddress,如果再次调用不再load和get</p>
+<p>为什么使用了延迟导入表技术可以实现任何地方都可以轻松运行?</p>
+<p>因为他把dll文件作为资源放进了自己那里,然后需要的时候再调用资源?</p>
+<p>关于这个书中有代码讲解,我没有去实现,,,,QWQ,还是去写一下吧,万一有用呢</p>
+<p>关于延迟导入的dll卸载,可以使用-delay:unload选项</p>
+<p>这是一个可选项,具体深入还不知道</p>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/abb299580b96/">
+          <h3 class="post-title">
+            下一篇：2023-11-30-周四
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

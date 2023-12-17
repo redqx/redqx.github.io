@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Windows API进内核的的方式</title>
+<meta name="keywords" content="Windows API进内核的的方式, The simpler, the happier">
+<meta name="description" content="转自 https://blog.csdn.net/qq_40363731/article/details/130095893
+在 Windows操作系统 中，应用程序要与内核进行交互时，需要通过一系列的步骤来实现。
+这些步骤包括调用应用程序">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Windows API进内核的的方式">
+<meta property="og:description" content="转自 https://blog.csdn.net/qq_40363731/article/details/130095893
+在 Windows操作系统 中，应用程序要与内核进行交互时，需要通过一系列的步骤来实现。
+这些步骤包括调用应用程序">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.0.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://redqx.github.io">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="https://redqx.github.io">
+        <h1 class="site-title">The simpler, the happier</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags/" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/categories/" class="menu purple-link">
+        分类
+      </a>
+    
+  
+    
+      <a href="/archives/" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about/" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Windows API进内核的的方式</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-15</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/blog/">
+              blog
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>转自 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40363731/article/details/130095893">https://blog.csdn.net/qq_40363731/article/details/130095893</a></p>
+<p>在 Windows操作系统 中，应用程序要与内核进行交互时，需要通过一系列的步骤来实现。</p>
+<p>这些步骤包括调用应用程序接口（API），转到内核模式，然后执行内核函数。</p>
+<p>在本文中，我们将详细介绍Windows API进入内核的流程，以及在不同架构的系统中这一流程是如何实现的</p>
+<p>首先我们来了解一下Windows API进入内核的基本流程：</p>
+<p>应用程序调用API，例如OpenProcess。</p>
+<p>API通过跳转指令（jmp）将调用转发给相应的DLL文件，如kernel32.dll。</p>
+<p>DLL文件继续将调用转发给内核基础库，如kernelbase.dll，这里的函数通常以Zw或Nt为前缀。</p>
+<p>最后，调用到达ntdll.dll，并通过特定的指令进入内核模式，例如sysenter、syscall或int 2E。</p>
+<p>接下来，我们将详细讨论在不同架构的操作系统和应用程序中，这一流程是如何实现的。</p>
+<p>ps: 这里我们提到了<code>kernelbase.dll</code></p>
+<p>接下来，我们将详细讨论在不同架构的操作系统和应用程序中，这一流程是如何实现的。</p>
+<p>我们以OpenProcess为例</p>
+<p>一、x86应用程序</p>
+<blockquote>
+<p>x86应用程序在x86操作系统上：</p>
+</blockquote>
+<p>exe -&gt; OpenProcess</p>
+<p>进入 kernel32.dll -&gt; jmp</p>
+<p>进入 kernelbase.dll -&gt; ZwOpenProcess</p>
+<p>进入 ntdll.dll -&gt; sysenter</p>
+<blockquote>
+<p>x86应用程序在x64操作系统上：</p>
+</blockquote>
+<p>exe -&gt; OpenProcess</p>
+<p>进入  kernel32.dll -&gt; jmp</p>
+<p>进入  kernelbase.dll -&gt; NtOpenProcess</p>
+<p>进入  ntdll.dll -&gt; Wow64</p>
+<p>二、x64应用程序</p>
+<p>x64应用程序在x64操作系统上：</p>
+<p>exe -&gt; OpenProcess</p>
+<p>进入  kernel32.dll -&gt; jmp</p>
+<p>进入  kernelbase.dll -&gt; NtOpenProcess</p>
+<p>进入  ntdll.dll -&gt; syscall&#x2F;int 2E</p>
+<p>为什么会学习这篇文章…</p>
+<p>杀软会hook一些API做一个监控吧,,,可能是的</p>
+<p>然后我们要绕过该API,,就得使用其它方式</p>
+<p>比如x64使用syscall的汇编</p>
+<p>然后发现 对x86的程序在x64上,,好像无法通过汇编直接调用API了</p>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/11eb4baa4192/">
+          <h3 class="post-title">
+            下一篇：汇编学习
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

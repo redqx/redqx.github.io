@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>x86之shellcode如何获取自己的eip</title>
+<meta name="keywords" content="x86之shellcode如何获取自己的eip, The simpler, the happier">
+<meta name="description" content="为什么会提出这个问题呢一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位
+比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,,
+这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了
+方法方法一:">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="x86之shellcode如何获取自己的eip">
+<meta property="og:description" content="为什么会提出这个问题呢一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位
+比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,,
+这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了
+方法方法一:">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.0.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://redqx.github.io">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="https://redqx.github.io">
+        <h1 class="site-title">The simpler, the happier</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags/" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/categories/" class="menu purple-link">
+        分类
+      </a>
+    
+  
+    
+      <a href="/archives/" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about/" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">x86之shellcode如何获取自己的eip</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/wiki/">
+              wiki
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="为什么会提出这个问题呢"><a href="#为什么会提出这个问题呢" class="headerlink" title="为什么会提出这个问题呢"></a>为什么会提出这个问题呢</h1><p>一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位</p>
+<p>比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,,</p>
+<p>这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h2 id="方法一-call的入栈"><a href="#方法一-call的入栈" class="headerlink" title="方法一:  call的入栈"></a>方法一:  call的入栈</h2><p>就是把返回地址入栈</p>
+<p>返回地址就是一个很真实的东西</p>
+<p>常见的模型如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call tag;</span><br><span class="line">tag:</span><br><span class="line">pop eax;</span><br></pre></td></tr></table></figure>
+
+<p>这样就获取了<code>pop eax</code>汇编所在的eip地址了</p>
+<p>然后通过后期的一些处理,,,就可以定位到自己的字符串</p>
+<p>举一个例子</p>
+<p><a class="simple-lightbox" href="/./img/image-20230722163015295.png"><img   src="/images/loading.svg" data-src="/./img/image-20230722163015295.png"  alt="image-20230722163015295" lazyload></a></p>
+<p>比如我们已知x1的地址,,如何获取y1的地址</p>
+<p>那就是x1的真实地址+一个相对偏移,,然后就可以定位到y1</p>
+<p>这个相对偏移,,比如是(y1地址-x1地址)</p>
+<p>无论x1地址怎么变化,,,我们只要拿着x1的真实地址,,然后x1+一个偏移,,就可以获取y1的真实地址</p>
+<p>所以,,大概就是这么一个道理,,,如果读者读不懂,,可以多看几遍</p>
+<p>于是见一下代码</p>
+<p>ps: 这个例子不太妥当,,,但是也想不到其它例子了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">lpfuncAddr</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;you got me!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    DWORD* lp_apiAddr;</span><br><span class="line"></span><br><span class="line">    __asm &#123;</span><br><span class="line">        push eax;</span><br><span class="line">        push ebx;</span><br><span class="line">        push ecx;</span><br><span class="line">    label_code:</span><br><span class="line">        call label_reloc;</span><br><span class="line">    label_reloc:</span><br><span class="line">        pop ebx;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//重定位lpfuncAddr;</span></span><br><span class="line">        lea eax, lpfuncAddr;</span><br><span class="line">        sub eax, label_reloc;</span><br><span class="line">        add eax, ebx;</span><br><span class="line"></span><br><span class="line">        lea ecx, lp_apiAddr;</span><br><span class="line">        mov[ecx], eax;</span><br><span class="line"></span><br><span class="line">        call eax;</span><br><span class="line"></span><br><span class="line">        pop ecx;</span><br><span class="line">        pop ebx;</span><br><span class="line">        pop eax;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如我们获取函数<code>lpfuncAddr</code>的地址,,存入到<code>lp_apiAddr</code>,并调用函数</p>
+<p>ebx就是一个真实地址,,,然后<code>label_reloc</code>也是<code>pop ebx;</code>的一个原始地址,<code>label_reloc</code>也是一个原始地址</p>
+<p>在汇编里面,下面这2巨汇编涉及的地址会被写死的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//重定位lpfuncAddr;</span><br><span class="line">lea eax, lpfuncAddr;</span><br><span class="line">sub eax, label_reloc;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a class="simple-lightbox" href="/./img/image-20231209213042743.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209213042743.png"  alt="image-20231209213042743" lazyload></a></p>
+<p>然后我们尝试调试一下</p>
+<p><a class="simple-lightbox" href="/./img/image-20231209213251723.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209213251723.png"  alt="image-20231209213251723" lazyload></a></p>
+<p>可以看到真实的基地址是<code>00600000</code>,原始的是<code>00400000</code></p>
+<p>然后通过定位好,,可以看到,,,eax已经获取了目标函数了</p>
+<p>为什么说,,这个例子举得不好,,,</p>
+<p>因为exe会重定位的,,,就针对本代码而言</p>
+<p><a class="simple-lightbox" href="/./img/image-20231209213608784.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209213608784.png"  alt="image-20231209213608784" lazyload></a></p>
+<p>只不过,,之前的</p>
+<p><a class="simple-lightbox" href="/./img/image-20231209213624093.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209213624093.png"  alt="image-20231209213624093" lazyload></a></p>
+<p>是被我手动修改了罢了,,,但也不影响</p>
+<h2 id="方法二-call-重构"><a href="#方法二-call-重构" class="headerlink" title="方法二: call 重构"></a>方法二: call 重构</h2><p>call类型来实现代码重构,,,</p>
+<p>那是什么意思???</p>
+<p><a class="simple-lightbox" href="/./img/image-20231209221233614.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209221233614.png"  alt="image-20231209221233614" lazyload></a></p>
+<p>可以看到<code>  call    near ptr loc_9F18D8+4</code></p>
+<p>call的地址是0F18DC,然后返回地址<code>009F18DD</code>会入栈</p>
+<p>然后call之后,,第一句执行的却是 <code>FFC3</code></p>
+<p>FFC3是inc ebx,,,虽然这个C3可以自定义,,比如inc eax是FFC2</p>
+<p>所以FFC3其实就是一个代码重构,,拿着<code>E8 FF FF FF FF </code>的FF和C3一起重构为inc ebx</p>
+<p>然后再来一个0x5B,也就是pop ebx,,把栈的返回值给拿出来,,,一样的实现了方法一的效果</p>
+<p>只不过会比方法1多消耗一个字节,,,方法1用6字节,,,方法2用7字节,,,但是干扰效果比方法1好</p>
+<p><a class="simple-lightbox" href="/./img/image-20231209222407182.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209222407182.png"  alt="image-20231209222407182" lazyload></a></p>
+<p>例子如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">lpfuncAddr</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;you got me!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    DWORD* lp_apiAddr;</span><br><span class="line"></span><br><span class="line">    __asm &#123;</span><br><span class="line">        push eax;</span><br><span class="line">        push ebx;</span><br><span class="line">        push ecx;</span><br><span class="line">        _emit <span class="number">0xE8</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>;</span><br><span class="line">        _emit <span class="number">0xFF</span>; <span class="comment">//上面完整的形成了一条汇编指令,,然后label_relo就是要入栈的地址</span></span><br><span class="line">    label_reloc: </span><br><span class="line">        _emit <span class="number">0xC3</span>;</span><br><span class="line">        _emit <span class="number">0x5B</span>;</span><br><span class="line">        <span class="comment">//重定位lpfuncAddr;</span></span><br><span class="line">        lea eax, lpfuncAddr;</span><br><span class="line">        sub eax, label_reloc;</span><br><span class="line">        add eax, ebx;</span><br><span class="line"></span><br><span class="line">        lea ecx, lp_apiAddr;</span><br><span class="line">        mov[ecx], eax;</span><br><span class="line"></span><br><span class="line">        call eax;</span><br><span class="line"></span><br><span class="line">        pop ecx;</span><br><span class="line">        pop ebx;</span><br><span class="line">        pop eax;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为什么我们在<code>_emit 0xFF;</code>后写<code>label_reloc: </code>,而不是其它字节之后呢???</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    _emit 0xE8;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF; //上面完整的形成了一条汇编指令,,然后label_relo就是要入栈的地址</span><br><span class="line">label_reloc: </span><br></pre></td></tr></table></figure>
+
+<p>这要追溯到方法1的原理了</p>
+<p><a class="simple-lightbox" href="/./img/image-20230722163015295.png"><img   src="/images/loading.svg" data-src="/./img/image-20230722163015295.png"  lazyload></a></p>
+<p>ebx是call入栈的地址,,,也是x1的真实地址,,</p>
+<p>我们要保证栈中的地址和x1地址是有关系的,,,,x1是原始的,,栈的是真实的</p>
+<p>这就是为什么我们要在xxx后面写label_reloc地址了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    _emit 0xE8;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF;</span><br><span class="line">    _emit 0xFF; //上面完整的形成了一条汇编指令,,然后label_relo就是要入栈的地址</span><br><span class="line">label_reloc: </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法三-浮点运指令特性"><a href="#方法三-浮点运指令特性" class="headerlink" title="方法三:  浮点运指令特性"></a>方法三:  浮点运指令特性</h2><p>什么特性呢?</p>
+<p>在一个浮点数指令执行后,,,,他的执行地址会被特殊的保存起来</p>
+<p>然后我们可以把保存的地址pop导出到栈中,然后读取出来</p>
+<p>案例1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.text:00A65084 D9 EE                         fldz</span><br><span class="line">.text:00A65086 D9 74 24 F4                   fnstenv byte ptr [esp-12]</span><br><span class="line">.text:00A6508A 5B                            pop     ebx</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a class="simple-lightbox" href="/./img/image-20231209223211445.png"><img   src="/images/loading.svg" data-src="/./img/image-20231209223211445.png"  alt="image-20231209223211445" lazyload></a></p>
+<p>案例2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">debug043:00E00000 DA C5                         fcmovb  st, st(5)</span><br><span class="line">debug043:00E00002 B8 5B 43 B1 DA                mov     eax, 0DAB1435Bh</span><br><span class="line">debug043:00E00007 D9 74 24 F4                   fnstenv byte ptr [esp-12]</span><br><span class="line">debug043:00E0000B 5D                            pop     ebp</span><br></pre></td></tr></table></figure>
+
+<p>案例3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.data:0041A005 DA C9                         fcmove  st, st(1)</span><br><span class="line">.data:0041A007 D9 74 24 F4                   fnstenv byte ptr [esp-12]</span><br><span class="line">.data:0041A00B 5F                            pop     edi;edi直接获取0041A005</span><br></pre></td></tr></table></figure>
+
+<p>案例4</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.data:0041A01B fcmovbe st, st(2)</span><br><span class="line">.data:0041A01D fnstenv byte ptr [esp-12]</span><br><span class="line">.data:0041A021 pop     eax;eax直接获取0041A01</span><br></pre></td></tr></table></figure>
+
+<p>案例5</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.data:0041A036 fldpi</span><br><span class="line">.data:0041A038 mov     ebx, 0F575EA6Bh</span><br><span class="line">.data:0041A03D</span><br><span class="line">.data:0041A03D loc_41A03D </span><br><span class="line">.data:0041A03D  fnstenv byte ptr [esp-12]</span><br><span class="line">.data:0041A041 pop     ebp ;ebp直接获取0041A036 </span><br></pre></td></tr></table></figure>
+
+
+
+<p>总结规律</p>
+<p><code> fnstenv byte ptr [esp-12]</code> 会把最近最靠近的那个浮点数操作指令的地址入栈</p>
+<p>然后pop 出来就是那个地址</p>
+<p>所以常见浮点数操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">D9 EE                         fldz</span><br><span class="line">D9 EB                         fldpi</span><br><span class="line">D9 C2                         fld     st(2)</span><br><span class="line">DD C6                         ffree   st(6)</span><br><span class="line">D9 CE                         fxch    st(6)</span><br><span class="line">D9 E9                         fldl2t</span><br><span class="line">DB D0                         fcmovnbe st, st</span><br><span class="line">DA C9                         fcmove  st, st(1)</span><br><span class="line">DA D2                         fcmovbe st, st(2)</span><br><span class="line">DB C3                         fcmovnb st, st(3)</span><br><span class="line">DA C5                         fcmovb  st, st(5)</span><br><span class="line">DA D6                         fcmovbe st, st(6)</span><br><span class="line">DB CF                         fcmovne st, st(7)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其它方法"><a href="#其它方法" class="headerlink" title="其它方法"></a>其它方法</h2><p>中断: 说用int 2Eh 或者 int 2Ch 可以把下一条地址入ebx,没有实验成功</p>
+<p>异常:  通过异常,可以记录异常发生的位置eip</p>
+<p>但是没有超过过</p>
+<h1 id="后期"><a href="#后期" class="headerlink" title="后期"></a>后期</h1><p>关于x64如何获取自己的RIP</p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8F%90%E5%87%BA%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E5%91%A2"><span class="top-box-text">为什么会提出这个问题呢</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E6%96%B9%E6%B3%95"><span class="top-box-text">方法</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-call%E7%9A%84%E5%85%A5%E6%A0%88"><span class="top-box-text">方法一:  call的入栈</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-call-%E9%87%8D%E6%9E%84"><span class="top-box-text">方法二: call 重构</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89-%E6%B5%AE%E7%82%B9%E8%BF%90%E6%8C%87%E4%BB%A4%E7%89%B9%E6%80%A7"><span class="top-box-text">方法三:  浮点运指令特性</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E5%85%B6%E5%AE%83%E6%96%B9%E6%B3%95"><span class="top-box-text">其它方法</span></a></li></ol></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%90%8E%E6%9C%9F"><span class="top-box-text">后期</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/18bdc3409c97/">
+          <h3 class="post-title">
+            下一篇：所以,我又荒废了一学期-大三上
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+
