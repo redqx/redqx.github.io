@@ -85,6 +85,156 @@
 
 <section class="post-item">
     <div class="content">
+      <a href="/2023/058eaa7c21dd/">
+        <h2 class="post-title">从汇编到字节码的方式</h2>
+      </a>
+      <a href="/2023/058eaa7c21dd/">
+          <div class="post-abstract">
+            
+			    为什么会写这篇文章….
+因为vs2019的 c&#x2F;c++ x86中,内嵌汇编的语法有限
+比如难受的_emit语法,,,无法使用db,dw,dd指令
+对于纯汇编手写的shellcode,,,不是内嵌那种
+我还是建议使用纯正的汇编编译器
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-14</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/1181cb22403f/">
+        <h2 class="post-title">如何CreateProcessA创建的子进程</h2>
+      </a>
+      <a href="/2023/1181cb22403f/">
+          <div class="post-abstract">
+            
+			    情况1之前APT分析分时候….
+看见一个进程创建了很多的子进程,,,,也没有去调试这个子进程,,,,,
+当时的情况是,,,子进程是一个落地的文件,,,然后通过createprocess去打开这个进程
+当时,,,,也只是静态分析了这个子文件,
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-14</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+
+                调试技巧
+                
+            
+          </span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/865d1ba8b768/">
+        <h2 class="post-title">shellcode介绍</h2>
+      </a>
+      <a href="/2023/865d1ba8b768/">
+          <div class="post-abstract">
+            
+			    比较牛逼的文章太长了
+https://tttang.com/user/P3nro5e
+功能性shellcode的概念这是一个攻防对抗很激烈的年代，杀毒软件的查杀技术是立体的，特征码、云、主防、启发、虚拟机。
+如果恶意代码还只局限在必须依赖固
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/28235327b2f9/">
+        <h2 class="post-title">win.pe.dos头</h2>
+      </a>
+      <a href="/2023/28235327b2f9/">
+          <div class="post-abstract">
+            
+			    e_magic1234PIMAGE_DOS_HEADER idh = (PIMAGE_DOS_HEADER)module;if (idh-&gt;e_magic != IMAGE_DOS_SIGNATURE) &#123;    retur
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/33b943db80a1/">
+        <h2 class="post-title">win.pe.nt头</h2>
+      </a>
+      <a href="/2023/33b943db80a1/">
+          <div class="post-abstract">
+            
+			    
+NT_HEADERS
+
+1234567891011typedef struct _IMAGE_NT_HEADERS64 &#123;    DWORD Signature;    IMAGE_FILE_HEADER FileHeader;
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/36df8206982a/">
+        <h2 class="post-title">vs2019之C代码生成shellcode应注意什么</h2>
+      </a>
+      <a href="/2023/36df8206982a/">
+          <div class="post-abstract">
+            
+			    一些编译器的项目配置项目-&gt;配置属性-&gt;链接器-&gt;高级-&gt;入口点中添加MyMian字段
+项目-&gt;配置属性-&gt;C&#x2F;C++-&gt;代码生成-&gt;安全检查，点击禁用安全检查
+项目-&gt;配置属
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
       <a href="/2023/85ab09d046f5/">
         <h2 class="post-title">shellcode的一些常见手法</h2>
       </a>
@@ -99,15 +249,6 @@
       </a>
       <div class="post-info">
         <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                wiki
-                
-            
-          </span>
         
       </div>
     </div>
@@ -131,15 +272,6 @@
       </a>
       <div class="post-info">
         <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                wiki
-                
-            
-          </span>
         
       </div>
     </div>
@@ -183,207 +315,6 @@
 比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,,
 这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了
 方法方法一:
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                wiki
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/18bdc3409c97/">
-        <h2 class="post-title">所以,我又荒废了一学期-大三上</h2>
-      </a>
-      <a href="/2023/18bdc3409c97/">
-          <div class="post-abstract">
-            
-			    为什么会思考这个此刻我正处于大三上
-开始有点焦虑了..,身边的人都渐渐找到了实习,自己却还差很多,,,
-就在今晚,,,zk无意间说到,,这学期要结束了
-我当时有点震惊,,,,还质疑,,事实上确实是要介绍了
-这学期,,,我并没有感觉学出一个什
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                突然的思考
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/f56912d4a83c/">
-        <h2 class="post-title">2023-12-13-周三</h2>
-      </a>
-      <a href="/2023/f56912d4a83c/">
-          <div class="post-abstract">
-            
-			    农历十一月初一
-天气: 多云
-温度:14℃
-
-昨晚做了一个梦
-我记得是晚上3:00多的样子,,我醒了一下
-然后,,,发现室友没有睡,因为他们的手机是亮着的
-然后我继续睡觉
-然后我开始做梦,,,,
-做梦的过程中处于半清醒状态
-我记得做梦的过程
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                大学时光
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/bf984ad53f6d/">
-        <h2 class="post-title">2023-12-12-周二</h2>
-      </a>
-      <a href="/2023/bf984ad53f6d/">
-          <div class="post-abstract">
-            
-			    农历十月三十
-天气: 阴天
-温度:17℃
-
-周一起的很早,,,,
-然后去实验室复习操作系统,,,
-可能是起猛了吧….
-上午又回寝室睡觉了,,,,,
-中午我和zk,tyj去吃了三仔炒鸡,,
-广告语是:”三仔炒鸡,,成都最好吃的炒鸡”…经常在学
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                大学时光
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/374df5f8c792/">
-        <h2 class="post-title">Windows之PE文件学习</h2>
-      </a>
-      <a href="/2023/374df5f8c792/">
-          <div class="post-abstract">
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                PE
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/1d0cf3387c6f/">
-        <h2 class="post-title">win.pe.导入表</h2>
-      </a>
-      <a href="/2023/1d0cf3387c6f/">
-          <div class="post-abstract">
-            
-			    其它的先不说,,就简单说一些容易忘记的
-x86和x64的导入表而言
-他们的异同在哪里
-他们都是
-123DWORD32* AddressofName; // x86还是x64都是dword*DWORD32* Addressoffunction
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/5db7968f3124/">
-        <h2 class="post-title">win.pe.导出表</h2>
-      </a>
-      <a href="/2023/5db7968f3124/">
-          <div class="post-abstract">
-            
-			    12Export Directory.RVAExport Directory.SIZE 无用
-
-导出数据所在的节通常名字是.edata
-rdata也可以存储相关信息
-导出表结构
-123456789101112131415struct _IM
             
           </div>
       </a>

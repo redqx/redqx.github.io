@@ -113,10 +113,41 @@ masm32的语法在masm32中.16进制必须用h结尾表示,,,不能是0x,,,并">
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">assume fs:nothing</span><br><span class="line">mov ebx, fs:[edx + 30h]</span><br></pre></td></tr></table></figure>
 
 
+
+
+
+
+
+<h1 id="eflags"><a href="#eflags" class="headerlink" title="eflags"></a>eflags</h1><p>OF&#x3D;1: 有符号进位,借位</p>
+<p>CF&#x3D;1: 无符号的加法、减法和位移运中出现溢出</p>
+<p>SF&#x3D;1:  结果为负数, 否则非负数</p>
+<p>ZF: 计算结果是0</p>
+<p>PF: PF&#x3D;0,偶数个1, </p>
+<h1 id="x86-短跳转-指令"><a href="#x86-短跳转-指令" class="headerlink" title="x86 短跳转 指令"></a>x86 短跳转 指令</h1><p>我说的是短跳转指令,跳转范围只有-128,+128</p>
+<p>0), JO&#x2F;JNO: 0x70&#x2F;0x71</p>
+<p>1), JC&#x2F;JNC: 0x72&#x2F;0x73</p>
+<blockquote>
+<p>ps: 机器码,jc&#x3D;jb&#x3D;jnae,jnc&#x3D;jnb&#x3D;jae</p>
+</blockquote>
+<p>2), JZ&#x2F;JNZ: 0x74&#x2F;0x75   </p>
+<blockquote>
+<p>ps:机器码,JE&#x3D;JZ,JNE&#x3D;JNZ</p>
+</blockquote>
+<p>3), JBE&#x2F;JA:0x76&#x2F;0x77</p>
+<p>4), JS&#x2F;JNS: 0x78&#x2F;0x79</p>
+<p>5), JP&#x2F;JNP: 0x7A&#x2F;0x7B</p>
+<p>6), JL&#x2F;JGE: 0x7C&#x2F;0x7D</p>
+<p>7), JLE&#x2F;JG: 0x7E&#x2F;0x7F,</p>
+<blockquote>
+<p>ps:JLE&#x3D;JNG</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">具体到条件的分类:</span><br><span class="line">ZF = 1 或 SF = 1: JLE/JNG</span><br><span class="line">ZF = 0 且 SF = 0: JA/JNBE</span><br><span class="line">SF^OF=0 :JGE/JL</span><br><span class="line">SF ^OF=1: JL/JNGE</span><br><span class="line">OF: OF=1就JO ,OF=0就JNO</span><br><span class="line">SF: SF=1就JS,SF=0就JNS</span><br><span class="line">CF: CF=1就JC/JB/JNAE,CF=0就JAE/JNC</span><br><span class="line">ZF: ZF=1就JZ/JE,ZF=0就JNZ/JNE</span><br></pre></td></tr></table></figure>
+
+
         </div>
           
         <div class="top-div">
-          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#helloworld"><span class="top-box-text">helloworld</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#masm32%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="top-box-text">masm32的语法</span></a></li></ol>
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#helloworld"><span class="top-box-text">helloworld</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#masm32%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="top-box-text">masm32的语法</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#eflags"><span class="top-box-text">eflags</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#x86-%E7%9F%AD%E8%B7%B3%E8%BD%AC-%E6%8C%87%E4%BB%A4"><span class="top-box-text">x86 短跳转 指令</span></a></li></ol>
         </div>
           
       </div>

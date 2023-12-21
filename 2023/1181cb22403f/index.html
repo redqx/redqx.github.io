@@ -9,8 +9,8 @@
 
 <meta charset="utf-8" >
 
-<title>调试一个CreateProcessA创建的子进程</title>
-<meta name="keywords" content="调试一个CreateProcessA创建的子进程, The simpler, the happier">
+<title>如何CreateProcessA创建的子进程</title>
+<meta name="keywords" content="如何CreateProcessA创建的子进程, The simpler, the happier">
 <meta name="description" content="情况1之前APT分析分时候….
 看见一个进程创建了很多的子进程,,,,也没有去调试这个子进程,,,,,
 当时的情况是,,,子进程是一个落地的文件,,,然后通过createprocess去打开这个进程
@@ -18,7 +18,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="调试一个CreateProcessA创建的子进程">
+<meta property="og:title" content="如何CreateProcessA创建的子进程">
 <meta property="og:description" content="情况1之前APT分析分时候….
 看见一个进程创建了很多的子进程,,,,也没有去调试这个子进程,,,,,
 当时的情况是,,,子进程是一个落地的文件,,,然后通过createprocess去打开这个进程
@@ -88,7 +88,7 @@
   <div class="content-container">
     <div class="post-detail">
       
-      <h2 class="post-title">调试一个CreateProcessA创建的子进程</h2>
+      <h2 class="post-title">如何CreateProcessA创建的子进程</h2>
       <div class="post-info post-detail-info">
         <span><i class="icon icon-calendar-outline"></i> 2023-12-14</span>
         
@@ -109,11 +109,17 @@
 <p>看见一个进程创建了很多的子进程,,,,也没有去调试这个子进程,,,,,</p>
 <p>当时的情况是,,,子进程是一个落地的文件,,,然后通过createprocess去打开这个进程</p>
 <p>当时,,,,也只是静态分析了这个子文件,,,,没有去调试这个子进程</p>
-<p>当然在进程启动子进程后,,,已经运行了一些其它东西</p>
-<p>我们再去附加调试的话,,,可能会错过很多东西</p>
-<p>另外就是createprocess在创建进程的时候,,有很多的参数设置来对子进程创建的方式做一些修饰和限定</p>
-<p>比如进程参数的设定,,进程启动的方式,,,进程的一些权限句柄继承什么什么的</p>
-<p>所以这个createprocess创建出来的进程,可能比较的特殊</p>
+<p>为什么不去调试子文件</p>
+<p>父进程在启动子进程时,,,对子进程设置了很多上下文环境 </p>
+<p>如果单独去启动调试会出过很多东西,,,</p>
+<p>如果附加调试,处理不当也会出过很多东西,,,</p>
+<p>什么是设置上下问环境呢?</p>
+<p>比如父进程设置了子进程二点特权优先级</p>
+<p>比如设置了一些可进程的互斥体什么的</p>
+<p>就下下面这个API,,,</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">WINBASEAPI</span><br><span class="line">BOOL</span><br><span class="line">WINAPI</span><br><span class="line"><span class="title function_">CreateProcessA</span><span class="params">(</span></span><br><span class="line"><span class="params">    _In_opt_ LPCSTR lpApplicationName,</span></span><br><span class="line"><span class="params">    _Inout_opt_ LPSTR lpCommandLine,</span></span><br><span class="line"><span class="params">    _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,</span></span><br><span class="line"><span class="params">    _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,</span></span><br><span class="line"><span class="params">    _In_ BOOL bInheritHandles,</span></span><br><span class="line"><span class="params">    _In_ DWORD dwCreationFlags,</span></span><br><span class="line"><span class="params">    _In_opt_ LPVOID lpEnvironment,</span></span><br><span class="line"><span class="params">    _In_opt_ LPCSTR lpCurrentDirectory,</span></span><br><span class="line"><span class="params">    _In_ LPSTARTUPINFOA lpStartupInfo,</span></span><br><span class="line"><span class="params">    _Out_ LPPROCESS_INFORMATION lpProcessInformation</span></span><br><span class="line"><span class="params">    )</span>;</span><br></pre></td></tr></table></figure>
+
+<p>CreateProcessA不是给出exe路径启动就行了,,,还有很多参数的</p>
 <p>那该这么去附加调试?</p>
 <p>总不能说我们去单击子进程文件,,然后在进程列表中附加它,,,或者直接调试器启动它吧…</p>
 <p>但是我们进程环境已经丢失了</p>
