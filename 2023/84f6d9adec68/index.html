@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>浅谈免杀</title>
+<meta name="keywords" content="浅谈免杀, The simpler, the happier">
+<meta name="description" content="linkshttps://bbs.kanxue.com/thread-252772.htm
+写在前面做免杀，首先要原理烂熟于心，得知道为什么会被杀，杀的哪里，才有目的的去做，而不是啥都不懂，
+就去盲杀（在不清楚杀软规则好像也只能这样… 但是">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="浅谈免杀">
+<meta property="og:description" content="linkshttps://bbs.kanxue.com/thread-252772.htm
+写在前面做免杀，首先要原理烂熟于心，得知道为什么会被杀，杀的哪里，才有目的的去做，而不是啥都不懂，
+就去盲杀（在不清楚杀软规则好像也只能这样… 但是">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.0.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://redqx.github.io">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="https://redqx.github.io">
+        <h1 class="site-title">The simpler, the happier</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags/" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/categories/" class="menu purple-link">
+        分类
+      </a>
+    
+  
+    
+      <a href="/archives/" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about/" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">浅谈免杀</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-17</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-252772.htm">https://bbs.kanxue.com/thread-252772.htm</a></p>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>做免杀，首先要原理烂熟于心，得知道为什么会被杀，杀的哪里，才有目的的去做，而不是啥都不懂，</p>
+<p>就去盲杀（在不清楚杀软规则好像也只能这样… 但是效率很低嘛）</p>
+<p><a class="simple-lightbox" href="/./img/image-20211013003245103.png"><img   src="/images/loading.svg" data-src="/./img/image-20211013003245103.png"  alt="image-20211013003245103" lazyload></a></p>
+<p><a class="simple-lightbox" href="/./img/image-20211013003337672.png"><img   src="/images/loading.svg" data-src="/./img/image-20211013003337672.png"  alt="image-20211013003337672" lazyload></a></p>
+<h1 id="用什么语言"><a href="#用什么语言" class="headerlink" title="用什么语言"></a>用什么语言</h1><p>主流是c&#x2F;cpp</p>
+<p>也可以用其他语言 powershell &#x2F; c# &#x2F; go &#x2F; nim &#x2F;python &#x2F; Perl &#x2F; 易语言等来实现。方法还是很多的，但前提是要有一定的底层知识储备</p>
+<h1 id="修改特征码"><a href="#修改特征码" class="headerlink" title="修改特征码"></a>修改特征码</h1><p>最基本的免杀技术，不解释</p>
+<h1 id="通用免杀法"><a href="#通用免杀法" class="headerlink" title="通用免杀法"></a>通用免杀法</h1><p>替换资源、</p>
+<p>增加签名、</p>
+<p>加冷门壳、</p>
+<p>加多重壳</p>
+<h1 id="源码免杀法"><a href="#源码免杀法" class="headerlink" title="源码免杀法"></a>源码免杀法</h1><p>通过修改病毒的特征字符串、动态API调用、修改编译环境、套程序外壳(MFC、SDK、QT)等</p>
+<h1 id="花指令免杀"><a href="#花指令免杀" class="headerlink" title="花指令免杀"></a>花指令免杀</h1><p>它存在的唯一目的就是阻止反汇编程序，或对反汇编设置障碍</p>
+<h1 id="内存免杀"><a href="#内存免杀" class="headerlink" title="内存免杀"></a>内存免杀</h1><h1 id="二次编译"><a href="#二次编译" class="headerlink" title="二次编译"></a>二次编译</h1><p>比如shellcode放入python执行,然后打包位新的exe, 这就类似于二次编译</p>
+<h1 id="分离免杀"><a href="#分离免杀" class="headerlink" title="分离免杀"></a>分离免杀</h1><p>将枪和子弹分离</p>
+<p>从其它地方获取子弹</p>
+<p>枪很多情况下也会被杀</p>
+<h1 id="资源修改"><a href="#资源修改" class="headerlink" title="资源修改"></a>资源修改</h1><p>有些杀软会设置有扫描白名单，比如之前把程序图标替换为360安全卫士图标就能过360的查杀。</p>
+<ol>
+<li>加资源</li>
+</ol>
+<p>使用ResHacker对文件进行资源操作，找来多个正常软件，将它们的资源加入到自己软件，如图片，版本信息，对话框等。</p>
+<ol>
+<li>替换资源</li>
+</ol>
+<p>使用ResHacker替换无用的资源（Version等）。</p>
+<ol>
+<li>加签名</li>
+</ol>
+<p>使用签名伪造工具，将正常软件的签名信息加入到自己软件中</p>
+<h1 id="输入表免杀法-IAT"><a href="#输入表免杀法-IAT" class="headerlink" title="输入表免杀法 (IAT)"></a>输入表免杀法 (IAT)</h1><p>启发式引擎会扫描目标程序的输入表中是否包含指定的函数特征序列(函数调用特征码)。</p>
+<p>输入表函数移位法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//没看懂解释</span><br><span class="line">输入这是最早也是比较简单的输人表免杀方法了，虽然效果已经不像当年那么好了，但却是学习免杀过程必须要掌握的基础知识。我们使用C32打开一个EXE文件，找到输入表段，找到我们定位出的特征输入表，比如ShellExecuteA就是，我们将其使用OO填充，然后在附近找到一片空白区域，将刚才找到的代码再粘贴到空白区域中，并记下新函数的地址，ShellExecuteA字符串最前面的那个“S”的地址减2，即00078925，这样就实现了转移，但是要想让程序知道我们转移的函数，我们还得告诉输入表，刚才那个地址是文件偏移地址，但不是内存地址，我们需要利用OC计算出新的输入表函数ShellExecuteA的内存位置，并在LoadPE中修改才行。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输入表函数对调法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//没看懂</span><br><span class="line">输入表函数对调法：这个方法的原理就是将输入表函数名长度相同的函数在C32中进行对调，只有长度一样才不会出错，然后在LoadPE中做相应的修改即可。比如被查杀的函数是OpenFileA，存在于A.dll文件中，我们在b.dll中找到了一个GetATimeA函数，这两个函数名称长度一样，我们在C32中做了静态对换之后，还要将它们的RVA进行对换，操作很简单的，我就不演示了</span><br></pre></td></tr></table></figure>
+
+
+
+<p>手工重建输入表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关于输入表的重建，我想大家都非常熟悉了吧，这算是比较复杂的一种方法了，不过免杀效果非常好，这也是必须要掌握的方法哦！这个方法其实就是添加一个新区段，再把原来的输入表移到我们新建的区段上，重建主要是针对杀毒软件定位到大片输入表函数</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输入表隐藏法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将输入表加密隐藏，然后内存解密修复输入表。属于保护壳常用的技术。</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="代码混淆、加花"><a href="#代码混淆、加花" class="headerlink" title="代码混淆、加花"></a>代码混淆、加花</h1><h1 id="入口点模糊技术"><a href="#入口点模糊技术" class="headerlink" title="入口点模糊技术"></a>入口点模糊技术</h1><h1 id="内存加载执行PE文"><a href="#内存加载执行PE文" class="headerlink" title="内存加载执行PE文"></a>内存加载执行PE文</h1><h1 id="什么是白加黑"><a href="#什么是白加黑" class="headerlink" title="什么是白加黑"></a>什么是白加黑</h1><p>白加黑解决的是 Windows里面 <code>信任与权限</code>的问题，Windows 都相信你，它一个杀软有什么办法，</p>
+<p>权限指的是你的权限是否比杀软的权限高，如果你在0环，杀软在3环，它也没有权限来管你。</p>
+<p>白名单文件: 一个文件的哈希值被信任</p>
+<p>可以是带有Microsoft的二进制文件，例如office软件</p>
+<p>也可以是Microsoft系统目录中二进制文件</p>
+<p>也可以是第三方认证签名程序</p>
+<p>常见的白名单程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Rundll32.exe、Msiexec.exe、MSBuild.exe、InstallUtil.exe、</span><br><span class="line">Mshta.exe、Regsvr32.exe、Cmstp.exe、CScript.exe、</span><br><span class="line">WScript.exe、Forfiles.exe、te.exe、Odbcconf.exe、</span><br><span class="line">InfDefaultInstall.exe、Diskshadow.exe、PsExec.exe、</span><br><span class="line">Msdeploy.exe、Winword.exe、Regasm.exe、Regsvcs.exe、Ftp.exe、pubprn.vbs、winrm.vbs、slmgr.vbs、</span><br><span class="line">Xwizard.exe、Compiler.exe、IEExec.exe、</span><br><span class="line">MavInject32、Presentationhost.exe、Wmic.exe、</span><br><span class="line">Pcalua.exe、Url.dll、zipfldr.dll、Syncappvpublishingserver.vbs</span><br></pre></td></tr></table></figure>
+
+<p>具体更多白名单文件也可以去 <a target="_blank" rel="noopener" href="https://lolbas-project.github.io/">https://lolbas-project.github.io/</a> 看看</p>
+<p>vmplayer.exe，vmware.exe，VBoxHeadless.exe，VirtualBox.exe等虚拟机文件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/MojtabaTajik/Robber">https://github.com/MojtabaTajik/Robber</a></p>
+<p>比如你给他一个目录给他扫描</p>
+<p>他就会返回哪些是被签名的文件</p>
+<p>比如我么扫描QQ的目录为例子,就可以看到他的很多签名文件</p>
+<p><a class="simple-lightbox" href="/./img/image-20230728141757746.png"><img   src="/images/loading.svg" data-src="/./img/image-20230728141757746.png"  alt="image-20230728141757746" lazyload></a></p>
+<h1 id="网络绕过"><a href="#网络绕过" class="headerlink" title="网络绕过"></a>网络绕过</h1><p>一些bypass手法参考</p>
+<ul>
+<li>tcp分段：指的是数据包在传输过程中切分后以小段传输(效果也不错，但是网络连接不好很容易断掉)</li>
+<li>内容加密：针对传输的内容，比如那些执行命令的字符串等等，加密混淆，加密还是不要用简单的编码，你简单的base64编码一下，杀软、edr等还是可以检测到，最好用非对称加密</li>
+<li>使用合法证书 ： 这个自己找渠道获得吧…</li>
+</ul>
+<h1 id="对其它杀软的见解"><a href="#对其它杀软的见解" class="headerlink" title="对其它杀软的见解"></a>对其它杀软的见解</h1><p>小红伞源码免杀就杀几个下载函数</p>
+<p>无特征码免杀直接隐藏输入表  添加空区段</p>
+<p>特征码免杀就对定位到的主函数进行跨区段移位api函数在本区段找空白移位</p>
+<p>记住移位后的新地址在OC转为内存地址 在修改指针 如果不行就减去镜像基址</p>
+<p>大多都是RVA地址</p>
+<p>定位到DLL文件上直接填充</p>
+<p>加壳免杀直接加se或者穿山甲这些就过了</p>
+<p>BD免杀处理； 改资源 换图标 版本 再加个强壳 最后加个签名</p>
+<p>无特征免杀； PE优化 加签名DLL文件  PE头移动 小熊PE修改器</p>
+<p>加区段小熊PE修改器 加函数跟主函数添加一样的 微软压缩永久免杀</p>
+<p>改壳免杀 等价替换 为实现跳转NOP掉 添加空区段 clcc指令可以nop</p>
+<p>或者打乱pE结构  PE结构打乱工具  前提做处理 加资源 打乱pE结构  在加壳</p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#links"><span class="top-box-text">links</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="top-box-text">写在前面</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E7%94%A8%E4%BB%80%E4%B9%88%E8%AF%AD%E8%A8%80"><span class="top-box-text">用什么语言</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%BF%AE%E6%94%B9%E7%89%B9%E5%BE%81%E7%A0%81"><span class="top-box-text">修改特征码</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E9%80%9A%E7%94%A8%E5%85%8D%E6%9D%80%E6%B3%95"><span class="top-box-text">通用免杀法</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E6%BA%90%E7%A0%81%E5%85%8D%E6%9D%80%E6%B3%95"><span class="top-box-text">源码免杀法</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E8%8A%B1%E6%8C%87%E4%BB%A4%E5%85%8D%E6%9D%80"><span class="top-box-text">花指令免杀</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%86%85%E5%AD%98%E5%85%8D%E6%9D%80"><span class="top-box-text">内存免杀</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%BA%8C%E6%AC%A1%E7%BC%96%E8%AF%91"><span class="top-box-text">二次编译</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%88%86%E7%A6%BB%E5%85%8D%E6%9D%80"><span class="top-box-text">分离免杀</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E8%B5%84%E6%BA%90%E4%BF%AE%E6%94%B9"><span class="top-box-text">资源修改</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E8%BE%93%E5%85%A5%E8%A1%A8%E5%85%8D%E6%9D%80%E6%B3%95-IAT"><span class="top-box-text">输入表免杀法 (IAT)</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E3%80%81%E5%8A%A0%E8%8A%B1"><span class="top-box-text">代码混淆、加花</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%85%A5%E5%8F%A3%E7%82%B9%E6%A8%A1%E7%B3%8A%E6%8A%80%E6%9C%AF"><span class="top-box-text">入口点模糊技术</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%86%85%E5%AD%98%E5%8A%A0%E8%BD%BD%E6%89%A7%E8%A1%8CPE%E6%96%87"><span class="top-box-text">内存加载执行PE文</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%99%BD%E5%8A%A0%E9%BB%91"><span class="top-box-text">什么是白加黑</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%95%E8%BF%87"><span class="top-box-text">网络绕过</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E5%AF%B9%E5%85%B6%E5%AE%83%E6%9D%80%E8%BD%AF%E7%9A%84%E8%A7%81%E8%A7%A3"><span class="top-box-text">对其它杀软的见解</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/39bde91cdffa/">
+          <h3 class="post-title">
+            下一篇：2023-12-16-周六
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

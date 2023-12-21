@@ -85,6 +85,77 @@
 
 <section class="post-item">
     <div class="content">
+      <a href="/2023/60e04145dd87/">
+        <h2 class="post-title">x86之shellcode如何获取GetProcAddress和LoadLibrary</h2>
+      </a>
+      <a href="/2023/60e04145dd87/">
+          <div class="post-abstract">
+            
+			    步骤如下下面4个步骤的寄存器是有关联的
+环境有关系
+首先获取kernel32.dll的基地址12345678xor ecx, ecx;mov eax, fs: [ecx + 0x30] ;//获取PEBmov eax, [eax + 0xc
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/324189aa4c67/">
+        <h2 class="post-title">shellcode之kernel32基地址获取</h2>
+      </a>
+      <a href="/2023/324189aa4c67/">
+          <div class="post-abstract">
+            
+			    PEB信息遍历原理:  PEB结构体信息遍历
+使用前提: 好像没什么过分的环境要求
+遍历的链子如下
+123456TEB-&gt;-PEB-&gt;Ldr-&gt;	&#123;        InLoadOrderModuleList;  
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/539df70cca64/">
+        <h2 class="post-title">x86之shellcode如何获取自己的eip</h2>
+      </a>
+      <a href="/2023/539df70cca64/">
+          <div class="post-abstract">
+            
+			    为什么会提出这个问题呢一些shellcode在对自己的资源重定位上,,,会用到自我的eip定位
+比如或者一些xxxx,如全局的变量,,如字符串,,,如函数,,,
+这些都需要通过定位来实现,,,于是就引出如何获取eip这个问题了
+方法方法一:
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-13</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
       <a href="/2023/18bdc3409c97/">
         <h2 class="post-title">所以,我又荒废了一学期-大三上</h2>
       </a>
@@ -300,116 +371,6 @@ rdata也可以存储相关信息
 我并不知道自己是什么时候去摆摊
 用电脑打开安排表,,,看到tyj,zk,我,达哥是上午9:50到11:30的摆摊
 然后我在
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-12</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                大学时光
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/c55024bb8488/">
-        <h2 class="post-title">2023-12-09-周六</h2>
-      </a>
-      <a href="/2023/c55024bb8488/">
-          <div class="post-abstract">
-            
-			    农历十月廿七
-天气: 多云, 雾霾天，出门记得戴口罩
-温度:16℃
-
-我当然记得上午是9:00起床的, 醒来第一件事情就是问已经醒了的室友,现在是几点钟了
-因为我已经睡过头了,得知是9;00,不是很晚,,,虽然李涛学长约了我上午9:00打羽
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-12</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                大学时光
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/3fdce7415c42/">
-        <h2 class="post-title">2023-12-07-周四</h2>
-      </a>
-      <a href="/2023/3fdce7415c42/">
-          <div class="post-abstract">
-            
-			    农历十月廿五 
-天气:多云, 
-温度:10℃
-
-早上8:00左右,,我第一个在床上起来,
-然后看了一下周围,发现室友都还没有起来
-然乎睡眼惺忪,继续躺下睡
-在8:50的样子,我再次起床,,,室友还没有起来,
-不行,,,不能再睡了,,所以我起
-            
-          </div>
-      </a>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-12</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-
-                大学时光
-                
-            
-          </span>
-        
-      </div>
-    </div>
-  </section>
-
-
-
-<section class="post-item">
-    <div class="content">
-      <a href="/2023/8f1dbcec3a08/">
-        <h2 class="post-title">2023-12-06-周三</h2>
-      </a>
-      <a href="/2023/8f1dbcec3a08/">
-          <div class="post-abstract">
-            
-			    农历十月廿四
-天气:多云, 
-温度:10℃
-
-其实,,慢慢发现,跟着别人的文章或者看别人的博客去学习,,,
-会发现很对意象不到的事情
-另外,就是看别人的博客,运气好的话,,总会看到一些很好玩的东西
-
             
           </div>
       </a>
