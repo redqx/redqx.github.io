@@ -1,191 +1,113 @@
-/* global window, document */
-'use strict';
-
-// 菜单
-document.querySelector('.menu-switch').addEventListener('click', function() {
-  const menuContainer = document.querySelector('.menu-container');
-
-  if (this.classList.contains('icon-menu-outline')) {
-    this.classList.replace('icon-menu-outline', 'icon-close-outline');
-    menuContainer.style.opacity = '1';
-    menuContainer.style.height = 'auto';
-    menuContainer.style['z-index'] = '1024';
-  } else {
-    this.classList.replace('icon-close-outline', 'icon-menu-outline');
-    menuContainer.style.opacity = '0';
-    menuContainer.style['z-index'] = '0';
-
-    setTimeout(() => {
-      if (this.classList.contains('icon-menu-outline')) {
-        menuContainer.style.height = '0';
-      }
-    }, 600);
-  }
-});
-
-// 代码复制
-function addCopyIcons() {
-  const copyIcon = document.createElement('i');
-  copyIcon.className = 'fa-solid icon icon-copy copy-code';
-  copyIcon.title = '复制代码';
-
-  document.querySelectorAll('.post-detail figure').forEach(figure => {
-    figure.appendChild(copyIcon.cloneNode(true));
-  });
-
-  document.querySelectorAll('.post-detail pre[class*=language-].line-numbers').forEach(codeBlock => {
-    codeBlock.appendChild(copyIcon.cloneNode(true));
-  });
-
-  document.querySelectorAll('.post-detail .copy-code').forEach(copyCodeBtn => {
-    copyCodeBtn.addEventListener('click', function() {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      const table = this.previousElementSibling.tagName === 'TABLE' ? this.previousElementSibling : null;
-      const preElement = table ? table.querySelector('.code pre') : this.previousElementSibling;
-
-      range.selectNodeContents(preElement);
-      selection.removeAllRanges();
-      selection.addRange(range);
-      selection.toString();
-      document.execCommand('copy');
-      selection.removeAllRanges();
-
-      this.innerHTML = '<span class="copy-success"> 复制成功</span>';
-      const that = this;
-      setTimeout(() => {
-        that.innerHTML = '';
-      }, 2500);
-    });
-  });
-}
-
-// 代码语言
-function setLanguageAttributes() {
-  const setLanguageAttribute = (element, attributeName) => {
-    const codeLanguage = element.getAttribute('class');
-    if (codeLanguage) {
-      const langName = codeLanguage.replace(attributeName, '').trim().replace('language-', '').trim();
-      element.setAttribute('data-content-after', langName || 'CODE');
-    }
+/**
+ * Sets up Justified Gallery.
+ */
+if (!!$.prototype.justifiedGallery) {
+  var options = {
+    rowHeight: 140,
+    margins: 4,
+    lastRow: "justify"
   };
-
-  document.querySelectorAll('code').forEach(codeBlock => {
-    setLanguageAttribute(codeBlock, 'line-numbers');
-  });
-
-  document.querySelectorAll('.highlight').forEach(highlightBlock => {
-    setLanguageAttribute(highlightBlock, 'highlight');
-  });
+  $(".article-gallery").justifiedGallery(options);
 }
 
-// 文章详情侧边目录
-function handleScroll() {
-  const mainNavLinks = document.querySelectorAll('.top-box a');
-  const fromTop = window.scrollY + 100;
+$(document).ready(function() {
 
-  mainNavLinks.forEach((link, index) => {
-    const section = document.getElementById(decodeURI(link.hash).substring(1));
-    let nextSection = null;
-    if (mainNavLinks[index + 1]) {
-      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+  /**
+   * Shows the responsive navigation menu on mobile.
+   */
+  $("#header > #nav > ul > .icon").click(function() {
+    $("#header > #nav > ul").toggleClass("responsive");
+  });
+
+
+  /**
+   * Controls the different versions of  the menu in blog post articles 
+   * for Desktop, tablet and mobile.
+   */
+  if ($(".post").length) {
+    var menu = $("#menu");
+    var nav = $("#menu > #nav");
+    var menuIcon = $("#menu-icon, #menu-icon-tablet");
+
+    /**
+     * Display the menu on hi-res laptops and desktops.
+     */
+    if ($(document).width() >= 1440) {
+      menu.show();
+      menuIcon.addClass("active");
     }
 
-    if (section.offsetTop <= fromTop && (!nextSection || nextSection.offsetTop > fromTop)) {
-      link.classList.add('current');
-    } else {
-      link.classList.remove('current');
-    }
-  });
-}
-
-function bindScrollEvent() {
-  window.addEventListener('scroll', () => {
-    handleScroll();
-  });
-}
-
-// 点击锚点滚动条偏移
-function bindClickEvent() {
-  const topBoxLinks = document.querySelectorAll('.top-box-link');
-  topBoxLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      setTimeout(() => {
-        window.scrollTo(window.pageXOffset, window.pageYOffset - 54);
-        console.log(window.pageYOffset - 54, '滚动条位置');
-      }, 0);
+    /**
+     * Display the menu if the menu icon is clicked.
+     */
+    menuIcon.click(function() {
+      if (menu.is(":hidden")) {
+        menu.show();
+        menuIcon.addClass("active");
+      } else {
+        menu.hide();
+        menuIcon.removeClass("active");
+      }
+      return false;
     });
-  });
-}
 
-function lazyload(imgs, data) {
-  data.now = Date.now();
-  data.needLoad = Array.from(imgs).some(i => i.hasAttribute('lazyload'));
+    /**
+     * Add a scroll listener to the menu to hide/show the navigation links.
+     */
+    if (menu.length) {
+      $(window).on("scroll", function() {
+        var topDistance = menu.offset().top;
 
-  const h = window.innerHeight;
-  const s = document.documentElement.scrollTop || document.body.scrollTop;
+        // hide only the navigation links on desktop
+        if (!nav.is(":visible") && topDistance < 50) {
+          nav.show();
+        } else if (nav.is(":visible") && topDistance > 100) {
+          nav.hide();
+        }
 
-  imgs.forEach(img => {
-    if (img.hasAttribute('lazyload') && !img.hasAttribute('loading')) {
-
-      if ((h + s) > img.offsetTop) {
-        img.setAttribute('loading', true);
-        const loadImageTimeout = setTimeout(() => {
-          // eslint-disable-next-line no-undef
-          const temp = new Image();
-          const src = img.getAttribute('data-src');
-          temp.src = src;
-          temp.onload = () => {
-            img.src = src;
-            img.removeAttribute('lazyload');
-            img.removeAttribute('loading');
-            clearTimeout(loadImageTimeout);
-          };
-        }, 300);
-      }
+        // on tablet, hide the navigation icon as well and show a "scroll to top
+        // icon" instead
+        if ( ! $( "#menu-icon" ).is(":visible") && topDistance < 50 ) {
+          $("#menu-icon-tablet").show();
+          $("#top-icon-tablet").hide();
+        } else if (! $( "#menu-icon" ).is(":visible") && topDistance > 100) {
+          $("#menu-icon-tablet").hide();
+          $("#top-icon-tablet").show();
+        }
+      });
     }
-  });
-}
 
-// 图片懒加载
-function lazyloadLoad() {
-  if (window.theme_config.image && window.theme_config.image.lazyload_enable) {
-    const imgs = document.querySelectorAll('img');
+    /**
+     * Show mobile navigation menu after scrolling upwards,
+     * hide it again after scrolling downwards.
+     */
+    if ($( "#footer-post").length) {
+      var lastScrollTop = 0;
+      $(window).on("scroll", function() {
+        var topDistance = $(window).scrollTop();
 
-    const data = {
-      now: Date.now(),
-      needLoad: true
-    };
+        if (topDistance > lastScrollTop){
+          // downscroll -> show menu
+          $("#footer-post").hide();
+        } else {
+          // upscroll -> hide menu
+          $("#footer-post").show();
+        }
+        lastScrollTop = topDistance;
 
+        // close all submenu"s on scroll
+        $("#nav-footer").hide();
+        $("#toc-footer").hide();
+        $("#share-footer").hide();
 
-    lazyload(imgs, data);
-
-    window.onscroll = () => {
-      if (Date.now() - data.now > 50 && data.needLoad) {
-        lazyload(imgs, data);
-      }
-    };
+        // show a "navigation" icon when close to the top of the page, 
+        // otherwise show a "scroll to the top" icon
+        if (topDistance < 50) {
+          $("#actions-footer > #top").hide();
+        } else if (topDistance > 100) {
+          $("#actions-footer > #top").show();
+        }
+      });
+    }
   }
-}
-
-// 初始化页面
-function themeBoot() {
-  if (window.is_post) {
-    addCopyIcons();
-    setLanguageAttributes();
-    bindScrollEvent();
-    bindClickEvent();
-  }
-
-  lazyloadLoad();
-
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  themeBoot();
-});
-
-// hexo-blog-encrypt See https://github.com/D0n9X1n/hexo-blog-encrypt
-window.addEventListener('hexo-blog-decrypt', () => {
-  themeBoot();
 });

