@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="dark">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="redqx" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      浅谈分离免杀 
+      
+      
+      |
+    
+     The simpler, the happier
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon2.png">
+    <link rel="icon" href="/images/favicon2.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar2.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">redqx</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+        <li class="nav-item" data-path="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">
+          <a target="_blank" rel="noopener" href="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">->wiki</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">浅谈分离免杀</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-12-27 23:33:37
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%85%8D%E6%9D%80/" title="免杀">
+                    #免杀
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="https://luckyfuture.top/BypassAVLearning.html">https://luckyfuture.top/BypassAVLearning.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://luckyfuture.top/BypassAVLearning2.html">https://luckyfuture.top/BypassAVLearning2.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://payloads.online/archivers/2019/11/10/65a9278d-27e7-4874-8769-6f39df5d994f">https://payloads.online/archivers/2019/11/10/65a9278d-27e7-4874-8769-6f39df5d994f</a></p>
+<p><a target="_blank" rel="noopener" href="https://payloads.online/archivers/2019/11/10/73579ded-074c-4628-a3e1-69779218564d">https://payloads.online/archivers/2019/11/10/73579ded-074c-4628-a3e1-69779218564d</a></p>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>把子弹和枪进行一个分离</p>
+<p>可以降低被查杀的风险</p>
+<p>这就是分离免杀的核心思想</p>
+<p>于是分离免杀要讲的就到此结束了😀😀😀😀</p>
+<p>??? 没结束呢</p>
+<p>分离之后,如何合在一起,这就得讨论到数据的传输了</p>
+<p>数据的传输不是免杀技术特有的</p>
+<p>而是把数据传输技术运用到了免杀领域</p>
+<h1 id="文件分离"><a href="#文件分离" class="headerlink" title="文件分离"></a>文件分离</h1><p>分为2个部分…</p>
+<p>一个是基于shellcode的二进制文件 </p>
+<p>一个是加载器 </p>
+<p>加载器负责从指定路径读取二进制文件,,,</p>
+<p>然后加载到内存中,然后做一个最常规的内存加载和运行</p>
+<p>所以原理就这么简单了,,,</p>
+<p>原始代码如下:</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/redqx/bypass_01/tree/master/01.%E6%96%87%E4%BB%B6%E5%88%86%E7%A6%BB">https://github.com/redqx/bypass_01/tree/master/01.%E6%96%87%E4%BB%B6%E5%88%86%E7%A6%BB</a></p>
+<p>杀软测试: 2023-12-27</p>
+<p>vt查杀率:  12&#x2F;72</p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/dd9c9972f3919328c1d649b75d43d887d2deaee8023baaaa2df0b65217a18939?nocache=1">https://www.virustotal.com/gui/file/dd9c9972f3919328c1d649b75d43d887d2deaee8023baaaa2df0b65217a18939?nocache=1</a></p>
+<p>静态查杀: 过某绒, Windows defender</p>
+<p>动态查杀: 过某绒,Windows defender</p>
+<p>数字杀毒: 起初过了静态查杀,在动态查杀之后,再上线,静态查杀就过不了了</p>
+<p><img src="/./img/image-20231227103754011.png" alt="image-20231227103754011"></p>
+<p>然后我们尝试一个模糊处理和API隐藏,,,</p>
+<p>查杀测试: 2012-12-27</p>
+<p>vt查杀率:查杀率 6&#x2F;72</p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/e3cbaeae412217ed6ef24b9256713e5ec260664545dd02c29b2f8768fefcc221?nocache=1">https://www.virustotal.com/gui/file/e3cbaeae412217ed6ef24b9256713e5ec260664545dd02c29b2f8768fefcc221?nocache=1</a></p>
+<p>静态查杀: 过火绒,Windows Defender</p>
+<p>动态查杀: 过火绒,Windows Defender</p>
+<h1 id="基于pipe通信"><a href="#基于pipe通信" class="headerlink" title="基于pipe通信"></a>基于pipe通信</h1><p>pipe是管道传输的….</p>
+<p>我们的shellcode用管道进行一个传输,从而实现一个分离</p>
+<p>原始代如下</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/redqx/bypass_01/tree/master/02.pipe%E7%AE%A1%E9%81%93%E9%80%9A%E4%BF%A1">https://github.com/redqx/bypass_01/tree/master/02.pipe%E7%AE%A1%E9%81%93%E9%80%9A%E4%BF%A1</a></p>
+<p>客户端: 连接管道,往管道写入数据</p>
+<p>服务端: 创建管道,等待管道有数据,然后接受数据,解密加载并运行</p>
+<p>查杀测试: 2012-12-27</p>
+<p>vt 查杀率 </p>
+<p>client : 11&#x2F;72</p>
+<p>server: 15&#x2F;72</p>
+<p>client: <a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/8e2f2fadb3d229d2b251152277024fa061bb46c10976f8bc823002ff740e3105?nocache=1">https://www.virustotal.com/gui/file/8e2f2fadb3d229d2b251152277024fa061bb46c10976f8bc823002ff740e3105?nocache=1</a></p>
+<p>server: <a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/4c545853db60d3ff9680f727a5461330c3ea7c939c97cc8cabe209c562fd73e5?nocache=1">https://www.virustotal.com/gui/file/4c545853db60d3ff9680f727a5461330c3ea7c939c97cc8cabe209c562fd73e5?nocache=1</a></p>
+<p>静态: 无法过数字杀毒和火绒,只能过wWindows defender</p>
+<h1 id="基于socket"><a href="#基于socket" class="headerlink" title="基于socket"></a>基于socket</h1><p>也就是通过socket通信,然后传输数据</p>
+<p>代码如下:</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/redqx/bypass_01/tree/master/03.socket">https://github.com/redqx/bypass_01/tree/master/03.socket</a></p>
+<p>查杀测试 2012-12-27:</p>
+<p>客户端: vt 15&#x2F;75 </p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/b82f7cf5a576b5c2a06971d7317dab0368e2b961b33539d1639c037b8fb537e5?nocache=1">https://www.virustotal.com/gui/file/b82f7cf5a576b5c2a06971d7317dab0368e2b961b33539d1639c037b8fb537e5?nocache=1</a></p>
+<p>服务端: vt 13&#x2F;72 </p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/a36396f08670cce1aa4f120a3b207f684d02d5453b76d20b4ff0222aa5f7d40f?nocache=1">https://www.virustotal.com/gui/file/a36396f08670cce1aa4f120a3b207f684d02d5453b76d20b4ff0222aa5f7d40f?nocache=1</a></p>
+<p>静态:  无法过数字杀毒,可过某绒</p>
+<p>动态:  可过某绒</p>
+<p>可以从本地进行一个访问,,也就是从127.0.0.1:port去读取shellcode</p>
+<p>也可以从外网 10.19.233.8:port 去读取shellcode</p>
+<h1 id="基于-winhttp"><a href="#基于-winhttp" class="headerlink" title="基于 winhttp"></a>基于 winhttp</h1><p>有了socket为什么要用winhttp</p>
+<p>我也不太知道,,,</p>
+<p>winhttp通信类似于浏览器,,</p>
+<p>可能为了流量的伪装,,然后通过http协议的方式去发送和结束数据</p>
+<p>代码如下: </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/redqx/bypass_01/tree/master/04.winhttp">https://github.com/redqx/bypass_01/tree/master/04.winhttp</a></p>
+<p>客户端:</p>
+<p>发起get请求, 然后得到被加密的shellocde, 然后解密执行</p>
+<p>服务端: 监听get请求, 根据请求,读取文件并发送过去</p>
+<p>服务端的http请求既可以使用python来启动</p>
+<p>也可以使用Linux C来实现…</p>
+<p>如果要精细化控制,,感觉用Linux C去实现</p>
+<p>未测试: 好像被杀得很厉害,,,</p>
+
+      </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#links"><span class="toc-text">links</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%88%86%E7%A6%BB"><span class="toc-text">文件分离</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8Epipe%E9%80%9A%E4%BF%A1"><span class="toc-text">基于pipe通信</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8Esocket"><span class="toc-text">基于socket</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-winhttp"><span class="toc-text">基于 winhttp</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/redqx">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+            <a title="email" href="mailto:935797872@qq.com">
+              <i class="iconfont icon-envelope"></i>
+            </a>
+            
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/redqx">Copyright © 2023 redqx</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%B5%85%E8%B0%88%E5%88%86%E7%A6%BB%E5%85%8D%E6%9D%80 + '&url=' + https%3A%2F%2Fredqx.github.io%2F2023%2F4a49ca456f5b%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://redqx.github.io/2023/4a49ca456f5b/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
