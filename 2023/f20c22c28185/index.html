@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="dark">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <meta name="author" content="redqx" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      Windows驱动调试 
+      
+      
+      |
+    
+     The simpler, the happier
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon2.png">
+    <link rel="icon" href="/images/favicon2.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+    
+<link rel="stylesheet" href="/css/figcaption/mac-block.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar2.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">redqx</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">目录</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">我呀</a>
+        </li>
+      
+        <li class="nav-item" data-path="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">
+          <a target="_blank" rel="noopener" href="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">->wiki</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Windows驱动调试</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-12-28 21:58:26
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/" title="调试技巧">
+                    #调试技巧
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21000273/article/details/52064994">https://blog.csdn.net/qq_21000273/article/details/52064994</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xuhuajie/p/11215238.html">https://www.cnblogs.com/xuhuajie/p/11215238.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://windbg.info/download/doc/pdf/WinDbg_A_to_Z_color.pdf">http://windbg.info/download/doc/pdf/WinDbg_A_to_Z_color.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37991872/how-to-reference-32bit-integer-data-in-a-64-bit-dump">https://stackoverflow.com/questions/37991872/how-to-reference-32bit-integer-data-in-a-64-bit-dump</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/awpatp/archive/2012/08/04/2623499.html">https://www.cnblogs.com/awpatp/archive/2012/08/04/2623499.html</a></p>
+<h1 id="—"><a href="#—" class="headerlink" title="—"></a>—</h1><p>重点:  驱动调试是基于内核调试</p>
+<p>也就是你要进入调试内核的状态</p>
+<p>才可以调试驱动的….</p>
+<h1 id="vs2019驱动调试"><a href="#vs2019驱动调试" class="headerlink" title="vs2019驱动调试"></a>vs2019驱动调试</h1><p>其实vs只是一个套壳</p>
+<p>本质还是windb在调试</p>
+<p>环境:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vs2019</span><br><span class="line">wdk10工具集</span><br><span class="line">虚拟机: win10-21H2-x64</span><br></pre></td></tr></table></figure>
+
+
+
+<p>首先win10虚拟机已经具备进入测试模式的条件</p>
+<p>然后配置vs</p>
+<p><img src="/./img/image-20231026164043989.png" alt="image-20231026164043989"></p>
+<p>然后添加设备</p>
+<p><img src="/./img/image-20231026164059284.png" alt="image-20231026164059284"></p>
+<p>然后 虚拟机设备起一个名字</p>
+<p> 然后填写虚拟机的IP地址</p>
+<p><img src="/./img/image-20231026165131007.png" alt="image-20231026165131007"></p>
+<p>然后下面填写的就是物理机的IP地址了</p>
+<p><img src="/./img/image-20231026165145518.png" alt="image-20231026165145518"></p>
+<p>然后</p>
+<p><img src="/./img/image-20231026165315577.png" alt="image-20231026165315577"></p>
+<p>然后</p>
+<p><img src="/./img/image-20231026170124983.png" alt="image-20231026170124983"></p>
+<p>附加后,win10不会马上停下来的</p>
+<p>当我们 加载驱动时遇到<code>KdBreakPoint();</code>时,vs那里就会停止下来</p>
+<p>或者说加载驱动运行的时候,遇到我们vs打的f2断点,也是可以停下来的</p>
+<p><img src="/./img/image-20231026170018399.png" alt="image-20231026170018399"></p>
+<p>或者我们在vs那里点击<code>全部中断</code>也可以让win10停下来,随后<code>继续</code>就行了</p>
+<p><img src="/./img/image-20231026170240487.png" alt="image-20231026170240487"></p>
+<p>只有当vs或者windbg连接win10成功后,才会有下面这个标志</p>
+<p><img src="/./img/image-20231026165703054.png" alt="image-20231026165703054"></p>
+<p>当我们注册一个sys,然后点击运行</p>
+<p><img src="/./img/image-20231026165750285.png" alt="image-20231026165750285"></p>
+<p>如下自动断在了物理机</p>
+<p><img src="/./img/image-20231026165834163.png"></p>
+<p>还有一点需要注意的是</p>
+<p><img src="/./img/image-20231106161451272.png" alt="image-20231106161451272"></p>
+<p>就算Status那里显示的Unavailable,也是不需要成功的连接虚拟机的</p>
+<p>反正我是试过的,虽然说Unavailable,还是连接上了</p>
+<p>另外,,,,这个network有时候会出问题,,,就死活连接不上,建议重启电脑,重新打开vmware</p>
+<h1 id="有符号调试"><a href="#有符号调试" class="headerlink" title="有符号调试"></a>有符号调试</h1><p>环境:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wdk10的windbg</span><br><span class="line">虚拟机: win10-21H2-x64</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="无符号调试"><a href="#无符号调试" class="headerlink" title="无符号调试"></a>无符号调试</h1><p>环境:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wdk10的windbg</span><br><span class="line">虚拟机: win10-21H2-x64</span><br></pre></td></tr></table></figure>
+
+
+
+<p>有符号的调试 代表给出函数名<code>DriverEntry </code>就可以在那里下断点</p>
+<p>但是我们通常拿不动别人的符号文件</p>
+<p>首先配置好windbg调试内核的环境 win10真机调试win10虚拟机</p>
+<p>默认windbg已经连接了win10</p>
+<p>然后 ,比如我们要加载的驱动文件的名字是re3.sys</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; sxe ld re3.sys</span><br><span class="line">0: kd&gt; g</span><br></pre></td></tr></table></figure>
+
+<p>然后在虚拟机加载驱动</p>
+<p>然后windbg就会停下来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; g</span><br><span class="line">nt!DebugService2+0x5:</span><br><span class="line">fffff801`05a15cc5 cc              int     3</span><br><span class="line">0: kd&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后查看当前模块</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; lm</span><br><span class="line">start             end                 module name</span><br><span class="line">00007ffd`7ee70000 00007ffd`7eea2000   vertdll    (deferred)             </span><br><span class="line">00007ffd`7eeb0000 00007ffd`7f0a7000   ntdll      (pdb symbols)          C:\ProgramData\dbg\sym\ntdll.pdb\FEA202D5473341CB4B29F58357A35D631\ntdll.pdb</span><br><span class="line">ffffa656`03200000 ffffa656`034d3000   win32kbase   (deferred)             </span><br><span class="line">ffffa656`034e0000 ffffa656`03896000   win32kfull   (deferred)             </span><br><span class="line">ffffa656`038a0000 ffffa656`038e9000   cdd        (deferred)             </span><br><span class="line">ffffa656`03a70000 ffffa656`03b0a000   win32k     (deferred)             </span><br><span class="line">...  </span><br><span class="line">fffff801`097b0000 fffff801`097bb000   vmgencounter   (deferred)             </span><br><span class="line">fffff801`097c0000 fffff801`097cf000   CmBatt     (deferred)             </span><br><span class="line">fffff801`097d0000 fffff801`097e0000   BATTC      (deferred)             </span><br><span class="line">fffff801`097f0000 fffff801`0981b000   vmhgfs     (deferred)             </span><br><span class="line">fffff801`09820000 fffff801`09827000   re3        (deferred)             </span><br><span class="line">....         </span><br><span class="line"></span><br><span class="line">Unloaded modules:</span><br><span class="line">fffff801`091e0000 fffff801`091f0000   dump_storport.sys</span><br><span class="line">fffff801`08630000 fffff801`0865e000   dump_stornvme.sys</span><br><span class="line">fffff801`08680000 fffff801`0869e000   dump_dumpfve.sys</span><br><span class="line">fffff801`099e0000 fffff801`099fc000   dam.sys </span><br><span class="line">fffff801`06f10000 fffff801`06f1a000   360elam64.sys</span><br><span class="line">fffff801`08030000 fffff801`08041000   hwpolicy.sys</span><br><span class="line">Unable to enumerate user-mode unloaded modules, Win32 error 0n30</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>起中就看到了我们的驱动re3.sys</p>
+<p>然后查看驱动加载的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1: kd&gt; lmvm re3</span><br><span class="line">Browse full module list</span><br><span class="line">start             end                 module name</span><br><span class="line">fffff805`40d60000 fffff805`40d67000   re3        (deferred)             </span><br><span class="line">    Image path: re3.sys</span><br><span class="line">    Image name: re3.sys</span><br><span class="line">    Browse all global symbols  functions  data</span><br><span class="line">    Timestamp:        Sun Nov  5 16:47:07 2023 (6547568B)</span><br><span class="line">    CheckSum:         00004A02</span><br><span class="line">    ImageSize:        00007000</span><br><span class="line">    Translations:     0000.04b0 0000.04e4 0409.04b0 0409.04e4</span><br><span class="line">    Information from resource tables:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可能是指令不对吧,导致有一些报错的</p>
+<p>但是可以看到加载的基地址了<code>fffff805</code>40d60000&#96;</p>
+<p>然后通过这个基地址,,我们就可以计算ep了</p>
+<p>网上是x86的计算,,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BaseAddress+poi(poi(BaseAddress+0x3c)+BaseAddress+0x28)</span><br></pre></td></tr></table></figure>
+
+<p>然后我修改了一下,计算x64的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fffff805`40d60000+dwo(fffff805`40d60000+dwo(fffff805`40d60000+0x3c)+0x28)</span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; bp fffff805`40d60000+dwo(fffff805`40d60000+dwo(fffff805`40d60000+0x3c)+0x28)</span><br><span class="line">0: kd&gt; g</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后就发现断下来了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; bp fffff805`40d60000+dwo(fffff805`40d60000+dwo(fffff805`40d60000+0x3c)+0x28)</span><br><span class="line">0: kd&gt; g</span><br><span class="line">Breakpoint 0 hit</span><br><span class="line">re3+0x5000:</span><br><span class="line">fffff801`09825000 48895c2408      mov     qword ptr [rsp+8],rbx</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/./img/image-20231218112653428.png" alt="image-20231218112653428"></p>
+<p>如果再改进一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0: kd&gt; r $t0 = fffff801`09820000</span><br><span class="line">0: kd&gt; r $t0</span><br><span class="line">$t0=fffff80109820000</span><br><span class="line">0: kd&gt; dd $t0+dwo($t0+dwo($t0+0x3c)+0x28)</span><br><span class="line">fffff801`09825000  245c8948 83485708 8b4820ec f98b48da</span><br><span class="line">fffff801`09825010  000017e8 d38b4800 e8cf8b48 ffffbfe0</span><br><span class="line">fffff801`09825020  245c8b48 c4834830 ccc35f20 cd058b48</span><br><span class="line">fffff801`09825030  48ffffdf 1b74c085 a232b948 2b992ddf</span><br><span class="line">fffff801`09825040  3b480000 480c74c1 8948d0f7 ffdfb705</span><br><span class="line">fffff801`09825050  b9ccc3ff 00000006 cccc29cd 00005088</span><br><span class="line">fffff801`09825060  00000000 00000000 0000513a 00002000</span><br><span class="line">fffff801`09825070  00000000 00000000 00000000 00000000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>于是就可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1: kd&gt; r $t0 = fffff805`40d60000</span><br><span class="line">1: kd&gt; r $t0</span><br><span class="line">$t0=fffff80540d60000</span><br><span class="line">1: kd&gt; bp $t0+dwo($t0+dwo($t0+0x3c)+0x28)</span><br><span class="line">1: kd&gt; bl</span><br><span class="line">     0 e Disable Clear  fffff805`40d65000     0001 (0001) re3+0x5000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#links"><span class="toc-text">links</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%80%94"><span class="toc-text">—</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vs2019%E9%A9%B1%E5%8A%A8%E8%B0%83%E8%AF%95"><span class="toc-text">vs2019驱动调试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7%E8%B0%83%E8%AF%95"><span class="toc-text">有符号调试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E8%B0%83%E8%AF%95"><span class="toc-text">无符号调试</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/redqx">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+        <li>
+          
+            <a title="email" href="mailto:935797872@qq.com">
+              <i class="iconfont icon-envelope"></i>
+            </a>
+            
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/redqx">Copyright © 2023 redqx</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Windows%E9%A9%B1%E5%8A%A8%E8%B0%83%E8%AF%95 + '&url=' + https%3A%2F%2Fredqx.github.io%2F2023%2Ff20c22c28185%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://redqx.github.io/2023/f20c22c28185/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
