@@ -101,7 +101,7 @@
         </li>
       
         <li class="nav-item" data-path="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">
-          <a target="_blank" rel="noopener" href="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">->wiki</a>
+          <a target="_blank" rel="noopener" href="https://redqx.notion.site/redqx/wiki-ece0586af1c740c4b0ed4678ab83d3ef">✈->wiki</a>
         </li>
       
     </ul>
@@ -163,7 +163,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-12-28 22:17:46
+          2023-12-29 00:04:38
         </span>
         
               <span class="post-tags">
@@ -180,13 +180,26 @@
       </div>
       <div class="markdown-body">
         <p>ps: 未整理的笔记</p>
-<h1 id="x86的dll"><a href="#x86的dll" class="headerlink" title="x86的dll"></a>x86的dll</h1><h2 id="常规情况下"><a href="#常规情况下" class="headerlink" title="常规情况下"></a>常规情况下</h2><p>其实就是基于Dllmain的一些特征,然后根据特征去寻找到关键位置,然后下断点</p>
+<p>试用情况:</p>
+<p>一般情况下pe可执行程序启动时,,断在dll加载的dllMain</p>
+<p>dll注入时,断在dllMain</p>
+<h1 id="x86的dll"><a href="#x86的dll" class="headerlink" title="x86的dll"></a>x86的dll</h1><h2 id="常规情况下"><a href="#常规情况下" class="headerlink" title="常规情况下"></a>常规情况下</h2><p>其实就是基于Dllmain的一些特征,</p>
+<p>然后根据特征去寻找到关键位置,</p>
+<p>然后下断点</p>
 <p>我们拿着以前的一个例子看看</p>
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled.png" alt="Untitled"></p>
 <p>比如上面这个dll</p>
 <p>他的特征就是一个switch case</p>
 <p>然后case的情况是0-3,也就是小于4</p>
-<p>于是根据这些特征我么就可能找到一个dll的main函数</p>
+<p>于是这是C代码层面的特征</p>
+<p>通过C代码层面,,我们就可以提取汇编的特征,也就是字节码的特征</p>
+<p>从而确定一个DllMain位于哪里</p>
+<p>假如我们提取到dllMain的函数特征</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FBin = &quot;83 BD&quot;;</span><br><span class="line">FBin2 =&quot;55 8B EC&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 然后写一个IDC脚本</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件名：test.idc</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;idc.idc&gt;</span></span></span><br><span class="line"><span class="type">static</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> x,y,dll_start,dll_end;</span><br><span class="line">    <span class="keyword">auto</span> FBin,FBin2;</span><br><span class="line">    dll_start=<span class="number">0x6bfb0000</span>;</span><br><span class="line">    dll_end=dll_start+<span class="number">0x00020000</span>;</span><br><span class="line">    FBin = <span class="string">&quot;83 BD&quot;</span>;</span><br><span class="line">    FBin2 =<span class="string">&quot;55 8B EC&quot;</span>;</span><br><span class="line">    Message(<span class="string">&quot;|-----BEGIN-----|\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (x = FindBinary(dll_start,SEARCH_DOWN,FBin);x &lt; dll_end;x = FindBinary(x,<span class="number">0x03</span>,FBin))</span><br><span class="line">    &#123;    </span><br><span class="line">        x=x+<span class="number">6</span>;</span><br><span class="line">        <span class="keyword">if</span>(Byte(x)&lt;<span class="number">4</span>)</span><br><span class="line">        &#123;         </span><br><span class="line">            x=x+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(Byte(x)==<span class="number">0x74</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                y = FindBinary(x,SEARCH_UP,FBin2);</span><br><span class="line">                <span class="keyword">if</span>(y!=<span class="number">0</span>&amp;&amp;y!=<span class="number">-1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    Message(<span class="string">&quot;%X\n&quot;</span>,y);</span><br><span class="line">                &#125;         </span><br><span class="line">               <span class="comment">// AddBpt(地址); //添加一个断点</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Message(<span class="string">&quot;|------END------|\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以看到它其实是在定位一些字节</p>
@@ -196,7 +209,7 @@
 <p>当匹配到这些特征后,又往上找</p>
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled3.png" alt="Untitled"></p>
 <p>找到后,就是Dllmain的东西</p>
-<p>我们以远程现场之dll注入为例子</p>
+<p>我们以远程线程之dll注入为例子</p>
 <p>把目标进程调试选项设置为当dll载入的时候,停止下来</p>
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled4.png" alt="Untitled"></p>
 <p>当停下来之后, 我们的dll就被注入进去了</p>
@@ -206,6 +219,7 @@
 <p>运行如下</p>
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled7.png" alt="Untitled"></p>
 <p>去往对应的地址,C一下,再P一下</p>
+<p>可能地址很多,,,都可以去看看,,是不是dllMain</p>
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled8.png" alt="Untitled"></p>
 <p>于是我们的Dllmain就找到了</p>
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled9.png" alt="Untitled"></p>
@@ -224,8 +238,8 @@
 <p>比如,我们有</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F7 <span class="number">05</span> D8 FA <span class="number">26</span> <span class="number">13</span> <span class="number">78</span> <span class="number">52</span> <span class="number">65</span> <span class="number">39</span></span><br></pre></td></tr></table></figure>
 
-<p>但是最好别匹配这么多</p>
-<p>也就匹配</p>
+<p>但是最好别匹配这么多,</p>
+<p>也就匹配一些字节,俗称模糊匹配</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F7 <span class="number">05</span> D8 FA</span><br></pre></td></tr></table></figure>
 
 <p>亲自尝试过,发现过于精准会引起idc的烦劳</p>
@@ -236,7 +250,6 @@
 <p><img src="/./img/2577cc91fd3b4b2a82622392688b452eUntitled12.png" alt="Untitled"></p>
 <p>获取那3个参数就是一个特征</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件名：test.idc</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;idc.idc&gt;</span></span></span><br><span class="line"><span class="type">static</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span> x,y,dll_start,dll_end;</span><br><span class="line">    <span class="keyword">auto</span> FBin,FBin2;</span><br><span class="line">    dll_start=<span class="number">0x00000001800116F0</span>;</span><br><span class="line">    dll_end=dll_start+<span class="number">0x000100</span>;</span><br><span class="line">    FBin = <span class="string">&quot;83 BD&quot;</span>;</span><br><span class="line">    FBin2 =<span class="string">&quot;4C 89 44 24 18 89 54 24 10 48 89 4C 24 08&quot;</span>;</span><br><span class="line">    Message(<span class="string">&quot;|-----BEGIN-----|\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (x = FindBinary(dll_start,SEARCH_DOWN,FBin);x &lt; dll_end;x = FindBinary(x,<span class="number">0x03</span>,FBin))</span><br><span class="line">    &#123;    </span><br><span class="line">        x=x+<span class="number">6</span>;</span><br><span class="line">        <span class="keyword">if</span>(Byte(x)&lt;<span class="number">4</span>)</span><br><span class="line">        &#123;         </span><br><span class="line">            x=x+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(Byte(x)==<span class="number">0x74</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                y = FindBinary(x,SEARCH_UP,FBin2);</span><br><span class="line">                <span class="keyword">if</span>(y!=<span class="number">0</span>&amp;&amp;y!=<span class="number">-1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    Message(<span class="string">&quot;%X\n&quot;</span>,y);</span><br><span class="line">                &#125;         </span><br><span class="line">               <span class="comment">// AddBpt(地址); //添加一个断点</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Message(<span class="string">&quot;|------END------|\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
 
       </div>
