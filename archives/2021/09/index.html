@@ -11,7 +11,7 @@
   
   <title>
     
-      Category 
+      archive_a: 2021/9 
       
       
       |
@@ -106,55 +106,109 @@
 
 
       <div class="flex-container">
-        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
-<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
 
+<!-- last: 按年份把文章分组，当前遍历到的年份 -->
+<!-- now: 当前遍历到的文章的发布年份 -->
 
-  <!-- LaTex Display -->
-
-  
-    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
-  
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    }
-  </script>
-
-
-
-
-
-  <!-- clipboard -->
-
-  
-    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
-  
-  
-<script src="/js/codeCopy.js"></script>
-
-
-
-
-
-
-
-  
-  <!-- 分类页 url形式：https://yoursite/categories/ -->
-  <div class="container category-index">
-    <div>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0/">日记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a><span class="category-list-count">1</span></li></ul>
-    </div>
+<div class="container archives">
+  <div class="post-list">
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2024</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="2024年的日记">
+        <div class="time-m-d">01-01</div>
+        <div class="title">
+          <a href="/2024/851d5ef07ff6/">
+            <span>2024年的日记</span>
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2023</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="2023年的日记">
+        <div class="time-m-d">01-01</div>
+        <div class="title">
+          <a href="/2023/432d78db20d2/">
+            <span>2023年的日记</span>
+          </a>
+        </div>
+      </div>
+    
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2021</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="last update">
+        <div class="time-m-d">09-21</div>
+        <div class="title">
+          <a href="/2021/785b5343d650/">
+            <span>last update</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="写过的代码">
+        <div class="time-m-d">09-21</div>
+        <div class="title">
+          <a href="/2021/8f2c2a020bfe/">
+            <span>写过的代码</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="winPwn学习之旅">
+        <div class="time-m-d">09-21</div>
+        <div class="title">
+          <a href="/2021/0105c33f564d/">
+            <span>winPwn学习之旅</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="winRe学习之旅">
+        <div class="time-m-d">09-21</div>
+        <div class="title">
+          <a href="/2021/6a8f2087b321/">
+            <span>winRe学习之旅</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="链接收集">
+        <div class="time-m-d">09-21</div>
+        <div class="title">
+          <a href="/2021/bda4f9a9d647/">
+            <span>链接收集</span>
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="计算机基础知识">
+        <div class="time-m-d">09-01</div>
+        <div class="title">
+          <a href="/2021/61fca1579033/">
+            <span>计算机基础知识</span>
+          </a>
+        </div>
+      </div>
+    
   </div>
-  
-
-  
-
-  
-
-  
+</div>
 
         
 <div class="footer">
@@ -419,24 +473,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + category + '&url=' + https%3A%2F%2Fredqx.github.io%2Fcategories%2Findex.html + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://redqx.github.io/categories/index.html" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
   
   
 <script src="/js/shares.js"></script>
