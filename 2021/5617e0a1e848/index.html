@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2024 
+      特殊日子 
       
       
       |
@@ -106,136 +106,118 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2024</span>
-          </h2>
-        </div>
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">特殊日子</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-01-05 00:10:18
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/%E6%96%87%E4%BA%BA%E5%A2%A8%E5%AE%A2/" title="文人墨客">
+                    <b>#</b> 文人墨客
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>记录哪些时间是或者xxx上,比较特殊的日子</p>
+<p><a target="_blank" rel="noopener" href="https://redqx.space/xian-qing-ya-qu/%E7%89%B9%E6%AE%8A%E6%97%A5%E5%AD%90/2023-12-31">特殊日子.2023-12-31</a></p>
+
+      </div>
       
-      <div class="post-item" title="2024年的日记">
-        <div class="time-m-d">01-01</div>
-        <div class="title">
-          <a href="/2024/851d5ef07ff6/">
-            <span>2024年的日记</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2023</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="2023年的日记">
-        <div class="time-m-d">01-01</div>
-        <div class="title">
-          <a href="/2023/432d78db20d2/">
-            <span>2023年的日记</span>
-          </a>
-        </div>
-      </div>
+
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="latest update - 更新日志">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/785b5343d650/">
-            <span>latest update - 更新日志</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="写过的代码">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/2a27f6899857/">
-            <span>写过的代码</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="链接收集">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/bda4f9a9d647/">
-            <span>链接收集</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="blog">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/1a876efb20c7/">
-            <span>blog</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="wiki">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/fbf6c5199b1d/">
-            <span>wiki</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="行万里路">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/cceb5c066782/">
-            <span>行万里路</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="特殊日子">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/5617e0a1e848/">
-            <span>特殊日子</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="唐诗宋词">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/cf693f00bc4a/">
-            <span>唐诗宋词</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="突然的思考">
-        <div class="time-m-d">09-21</div>
-        <div class="title">
-          <a href="/2021/ac5ab0caac22/">
-            <span>突然的思考</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+  
+    <script async type="text/javascript" src="/plugins/valine.min.js" onload="loadValineSuc(this)"></script>
+  
+
+  <div id="vcomments"></div>
+
+  <script>
+    function loadValineSuc() {
+      new Valine({
+        el: '#vcomments',
+        appId: 'g9ISE4awJHUvDsP8q7mLcpSd-gzGzoHsz',
+        appKey: '80Myej5b5XYWc7zli9YAY7by',
+        placeholder: 'Welcome!',
+        avatar: 'redqx',
+        lang: 'en'
+      })
+    }
+  </script>
+
+    <style>
+      .comments-container .v .vempty {
+        display: none!important;
+      }
+    </style>
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         
 <div class="footer">
@@ -500,6 +482,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%89%B9%E6%AE%8A%E6%97%A5%E5%AD%90 + '&url=' + https%3A%2F%2Fredqx.github.io%2F2021%2F5617e0a1e848%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://redqx.github.io/2021/5617e0a1e848/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
