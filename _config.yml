@@ -1,0 +1,76 @@
+title: Knowledge Sharing
+description: A Simple Blog by redqx
+author: Den9Qux1ang
+github: https://github.com/redqx
+theme_github: https://github.com/agusmakmun/agusmakmun.github.io
+jekylltheme_site: http://jekyllthemes.org/themes/stack-problems/
+about:  "你的对手是 神圣兽国 游尾郡窝窝乡 独行族妖侠 蛮吉"
+
+url: "https://redqx.github.io"
+baseurl: "/"
+
+
+disqus_shortname: stackproblems
+google_analytics: UA-XXXXXXXX-Y
+avatar_url: /static/img/avatar.jpg
+
+enableTags: true
+tagarray: []
+
+collections:
+  project:
+    output: true
+    permalink: /project/:path/
+
+social:
+    # - icon: fa-facebook
+    #   link: "#"
+    - icon: fa-twitter
+      link: "https://x.com/smilere441915"
+    # - icon: fa-linkedin
+    #   link: "https://www.linkedin.com/in/eduardo-novella-3b808260/"
+    # - icon: fa-stack-exchange
+    #   link: "#"
+    - icon: fa-github
+      link: "https://github.com/redqx"
+
+share:
+  twitter_username: resmilere441915
+  # fb_appid: 1749788565247320
+
+urls:
+    - text: About Me
+      url: /about/
+    - text: My Projects
+      url: /projects/
+    - text: XML Feed
+      url: /feed.xml
+
+
+paginate: 20
+per_page: 20
+paginate_path: "/page/:num/"
+markdown: kramdown
+kramdown:
+  input:  GFM
+  enable_coderay: true
+  
+plugins:
+  - jekyll-paginate
+  - jekyll-gist
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+
+
+# Gitalk  评论功能
+gitalk: 
+  enable: true    #是否开启Gitalk评论
+  clientID: Ov23liqnOuEzjh091rug    #生成的clientID，下面会讲
+  clientSecret: dc0f8f44b2d6c5b6c9dff2744e7822cd16b014e2 #生成的clientSecret
+  repo: redqx.github.io    #仓库名称
+  owner: redqx    #github用户名
+  admin: redqx
+  distractionFreeMode: false #是否启用类似FB的阴影遮罩

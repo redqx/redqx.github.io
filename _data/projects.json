@@ -1,0 +1,10 @@
+[
+	{
+		"slug": "cool-project",
+		"name": "Cool project 1",
+		"image": "placeholder.jpg",
+		"url": "https://www.google.com",
+		"date": "Jan 2014",
+		"tags": ["Python"]
+	},
+]
