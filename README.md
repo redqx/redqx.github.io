@@ -15,7 +15,12 @@ just a little site for recordding
 
 
 
-a geeky gay or a wooden boy，hahahha
+- A geeky boy or a wooden guy.
+- Chinese boy coming from SiChuan
+- born in 2001.09.27
+- 
+
+
 
 
 
