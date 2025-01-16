@@ -1,7 +1,7 @@
 
 
 <title>redqx</title>
-<meta name="description" content="证明我来过"/>
+<meta name="description" content="香香的博客"/>
 <meta name="keywords" content="time record"/>
 <meta name="author" content="redqx"/>
 
@@ -14,11 +14,6 @@ just a little site for recordding
 # about me
 
 
-
-- A geeky boy or a wooden guy.
-- Chinese boy coming from SiChuan
-- born in 2001.09.27
-- 
 
 
 
